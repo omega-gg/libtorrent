@@ -8,18 +8,9 @@ jobs:
     vmImage: "windows-latest"
   steps:
   - bash: |
-      cd ..
-      curl -L -o 3rdparty.zip http://omega.gg/get/Sky/3rdparty/win32
-      unzip 3rdparty.zip
-      mv 3rdparty/win32/MinGW/7.3.0 s/MinGW
-      curl -L -o boost.zip https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.zip
-      unzip boost.zip
-      mv boost_1_71_0 s/boost
-      curl -L -o libtorrent.tar.gz https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_2_2/libtorrent-rasterbar-1.2.2.tar.gz
-      tar -xf libtorrent.tar.gz
-      mv libtorrent-rasterbar-1.2.2 s/libtorrent
-      cd s
+      sh install.sh
       cmd < build.bat
+      mv boost/bin.v2 libtorrent/boost
   - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
     artifact: libtorrent-win32
 
