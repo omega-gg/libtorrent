@@ -1,1 +1,2 @@
-OTHER_FILES += .azure-pipelines.yml \
+OTHER_FILES += build.bat \
+               .azure-pipelines.yml \

@@ -19,9 +19,8 @@ jobs:
       tar -xf libtorrent.tar.gz
       mv libtorrent-rasterbar-1.2.2 s/libtorrent
       cd s
-      ls -la
-      #sh build.sh
-  - publish: $(System.DefaultWorkingDirectory)/deploy
+      cmd < build.bat
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin/gcc-7.3.0/release/threading-multi
     artifact: libtorrent-win32
 
 #- job: win64
