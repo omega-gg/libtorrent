@@ -20,7 +20,7 @@ jobs:
       mv libtorrent-rasterbar-1.2.2 s/libtorrent
       cd s
       cmd < build.bat
-  - publish: $(System.DefaultWorkingDirectory)/libtorrent
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
     artifact: libtorrent-win32
 
 #- job: win64

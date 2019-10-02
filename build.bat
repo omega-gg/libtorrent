@@ -1,4 +1,4 @@
-set PATH=%PATH%;%cd%\MinGW\bin;%cd%\boost\tools\build\src\engine\;%cd%\boost
+set PATH=%cd%\MinGW\bin;%cd%\boost\tools\build\src\engine\;%cd%\boost;%PATH%
 
 set BOOST_BUILD_PATH=%cd%\boost\tools\build\src
 
