@@ -18,18 +18,29 @@ Boost_versionA="1.71.0"
 Boost_versionB="1_71_0"
 
 #--------------------------------------------------------------------------------------------------
+# Syntax
+#--------------------------------------------------------------------------------------------------
 
-thirdparty="http://omega.gg/get/Sky/3rdparty/win32"
+if [ $# != 1 ] || [ $1 != "win32" -a $1 != "win64" ]; then
 
-boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
+    echo "Usage: configure <win32 | win64>"
 
-libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz"
+    exit 1
+fi
 
 #--------------------------------------------------------------------------------------------------
 # Configuration
 #--------------------------------------------------------------------------------------------------
 
-MinGW="$external/win32/MinGW/$MinGW_version"
+MinGW="$external/$1/MinGW/$MinGW_version"
+
+#--------------------------------------------------------------------------------------------------
+
+thirdparty="http://omega.gg/get/Sky/3rdparty/$1"
+
+boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
+
+libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz"
 
 #--------------------------------------------------------------------------------------------------
 # Download
