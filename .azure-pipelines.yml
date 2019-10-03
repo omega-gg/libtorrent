@@ -9,9 +9,7 @@ jobs:
   steps:
   - bash: |
       sh install.sh win32
-      cmd < build.bat
-      mv boost/bin.v2 libtorrent/bin/boost
-  - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
+  - publish: $(System.DefaultWorkingDirectory)/deploy
     artifact: libtorrent-win32
 
 - job: win64
@@ -20,7 +18,5 @@ jobs:
   steps:
   - bash: |
       sh install.sh win64
-      cmd < build.bat
-      mv boost/bin.v2 libtorrent/bin/boost
-  - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
+  - publish: $(System.DefaultWorkingDirectory)/deploy
     artifact: libtorrent-win64
