@@ -19,11 +19,11 @@ Boost_versionB="1_71_0"
 
 #--------------------------------------------------------------------------------------------------
 
-3rdparty=http://omega.gg/get/Sky/3rdparty/win32
+thirdparty="http://omega.gg/get/Sky/3rdparty/win32"
 
-boost=https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip
+boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
 
-libtorrent=https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz
+libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz"
 
 #--------------------------------------------------------------------------------------------------
 # Configuration
@@ -36,8 +36,8 @@ MinGW="$external/win32/MinGW/$MinGW_version"
 #--------------------------------------------------------------------------------------------------
 
 echo "DOWNLOADING 3rdparty"
-echo $3rdparty
-curl -L -o ../3rdparty.zip $3rdparty
+echo $thirdparty
+curl -L -o ../3rdparty.zip $thirdparty
 
 echo "DOWNLOADING boost"
 echo $boost
