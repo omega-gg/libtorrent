@@ -8,7 +8,7 @@ jobs:
     vmImage: "windows-latest"
   steps:
   - bash: |
-      sh install.sh win32
+      sh build.sh win32
   - publish: $(System.DefaultWorkingDirectory)/deploy
     artifact: libtorrent-win32
 
@@ -17,6 +17,6 @@ jobs:
     vmImage: "windows-latest"
   steps:
   - bash: |
-      sh install.sh win64
+      sh build.sh win64
   - publish: $(System.DefaultWorkingDirectory)/deploy
     artifact: libtorrent-win64
