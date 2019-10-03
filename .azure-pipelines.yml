@@ -10,7 +10,7 @@ jobs:
   - bash: |
       sh install.sh
       cmd < build.bat
-      mv boost/bin.v2 libtorrent/boost
+      mv boost/bin.v2 libtorrent/bin/boost
   - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
     artifact: libtorrent-win32
 
