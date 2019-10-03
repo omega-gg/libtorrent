@@ -14,15 +14,13 @@ jobs:
   - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
     artifact: libtorrent-win32
 
-#- job: win64
-  #pool:
-    #vmImage: "windows-latest"
-  #steps:
-  #- bash: |
-      #cd ..
-      #curl -L -o 3rdparty.zip http://omega.gg/get/Sky/3rdparty/win32
-      #unzip 3rdparty.zip
-      #cd s
-      #sh build.sh
-  #- publish: $(System.DefaultWorkingDirectory)/deploy
-    #artifact: libtorrent-win64
+- job: win64
+  pool:
+    vmImage: "windows-latest"
+  steps:
+  - bash: |
+      sh install.sh
+      cmd < build.bat
+      mv boost/bin.v2 libtorrent/bin/boost
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
+    artifact: libtorrent-win64

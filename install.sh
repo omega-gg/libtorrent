@@ -35,14 +35,17 @@ MinGW="$external/win32/MinGW/$MinGW_version"
 # Download
 #--------------------------------------------------------------------------------------------------
 
+echo ""
 echo "DOWNLOADING 3rdparty"
 echo $thirdparty
 curl -L -o ../3rdparty.zip $thirdparty
 
+echo ""
 echo "DOWNLOADING boost"
 echo $boost
 curl -L -o boost.zip $boost
 
+echo ""
 echo "DOWNLOADING libtorrent"
 echo $libtorrent
 curl -L -o libtorrent.tar.gz $libtorrent
