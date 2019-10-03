@@ -109,7 +109,7 @@ path="deploy/Boost/$Boost_versionA"
 
 mkdir -p "$path"
 
-cp -r boost/boost "$path"/Boost
+cp -r boost/boost deploy/Boost
 
 if [ $1 = "win32" ]; then
 
@@ -132,7 +132,7 @@ path="deploy/libtorrent/$libtorrent_versionA"
 
 mkdir -p "$path"
 
-cp -r libtorrent/include/libtorrent "$path"
+cp -r libtorrent/include/libtorrent deploy/libtorrent
 
 cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a "$path"/libtorrent.a
 cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll   "$path"

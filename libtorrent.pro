@@ -1,3 +1,3 @@
-OTHER_FILES += install.sh \
+OTHER_FILES += build.sh \
                build.bat \
                .azure-pipelines.yml \
