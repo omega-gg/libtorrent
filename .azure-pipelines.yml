@@ -8,7 +8,7 @@ jobs:
     vmImage: "windows-latest"
   steps:
   - bash: |
-      sh install.sh
+      sh install.sh win32
       cmd < build.bat
       mv boost/bin.v2 libtorrent/bin/boost
   - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
@@ -19,7 +19,7 @@ jobs:
     vmImage: "windows-latest"
   steps:
   - bash: |
-      sh install.sh
+      sh install.sh win64
       cmd < build.bat
       mv boost/bin.v2 libtorrent/bin/boost
   - publish: $(System.DefaultWorkingDirectory)/libtorrent/bin
