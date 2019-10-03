@@ -11,9 +11,19 @@ external="../3rdparty"
 
 MinGW_version="7.3.0"
 
-libtorrent_version="1.2.2"
+libtorrent_versionA="1.2.2"
+libtorrent_versionB="1_2_2"
 
-Boost_version="1.71.0"
+Boost_versionA="1.71.0"
+Boost_versionB="1_71_0"
+
+#--------------------------------------------------------------------------------------------------
+
+3rdparty=http://omega.gg/get/Sky/3rdparty/win32
+
+boost=https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip
+
+libtorrent=https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz
 
 #--------------------------------------------------------------------------------------------------
 # Configuration
@@ -25,11 +35,17 @@ MinGW="$external/win32/MinGW/$MinGW_version"
 # Download
 #--------------------------------------------------------------------------------------------------
 
-curl -L -o ../3rdparty.zip http://omega.gg/get/Sky/3rdparty/win32
+echo "DOWNLOADING 3rdparty"
+echo $3rdparty
+curl -L -o ../3rdparty.zip $3rdparty
 
-curl -L -o boost.zip https://dl.bintray.com/boostorg/release/$Boost_version/source/boost_$Boost_version.zip
+echo "DOWNLOADING boost"
+echo $boost
+curl -L -o boost.zip $boost
 
-curl -L -o libtorrent.tar.gz https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_version/libtorrent-rasterbar-$libtorrent_version.tar.gz
+echo "DOWNLOADING libtorrent"
+echo $libtorrent
+curl -L -o libtorrent.tar.gz $libtorrent
 
 #--------------------------------------------------------------------------------------------------
 # 3rdparty
@@ -53,7 +69,7 @@ cp -r $MinGW MinGW
 
 unzip boost.zip
 
-mv boost_$Boost_version boost
+mv boost_$Boost_versionB boost
 
 #--------------------------------------------------------------------------------------------------
 # libtorrent
@@ -61,4 +77,4 @@ mv boost_$Boost_version boost
 
 tar -xf libtorrent.tar.gz
 
-mv libtorrent-rasterbar-$libtorrent_version libtorrent
+mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
