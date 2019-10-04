@@ -109,7 +109,7 @@ path="deploy/Boost/$Boost_versionA"
 
 mkdir -p "$path"
 
-cp -r boost/boost "$path"
+cp -r boost/boost "$path"/Boost
 
 if [ $1 = "win32" ]; then
 
