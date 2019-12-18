@@ -20,3 +20,17 @@ jobs:
       sh build.sh win64
   - publish: $(System.DefaultWorkingDirectory)/deploy
     artifact: libtorrent-win64
+
+#--------------------------------------------------------------------------------------------------
+# macOS
+#--------------------------------------------------------------------------------------------------
+
+jobs:
+- job: macOS
+  pool:
+    vmImage: "macOS-latest"
+  steps:
+  - bash: |
+      sh build.sh macOS
+  - publish: $(System.DefaultWorkingDirectory)/deploy
+    artifact: libtorrent-macOS

@@ -23,9 +23,9 @@ Boost_versionC="1_71"
 # Syntax
 #--------------------------------------------------------------------------------------------------
 
-if [ $# != 1 ] || [ $1 != "win32" -a $1 != "win64" ]; then
+if [ $# != 1 ] || [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" ]; then
 
-    echo "Usage: configure <win32 | win64>"
+    echo "Usage: configure <win32 | win64 | macOS>"
 
     exit 1
 fi
@@ -99,7 +99,10 @@ mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 # Build
 #--------------------------------------------------------------------------------------------------
 
-cmd < build.bat
+if [ $1 = "win32" ]; then
+
+    cmd < build.bat
+fi
 
 #--------------------------------------------------------------------------------------------------
 # Deploy
@@ -134,5 +137,8 @@ mkdir -p "$path"
 
 cp -r libtorrent/include/libtorrent "$path"
 
-cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a "$path"/libtorrent.a
-cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll   "$path"
+if [ $1 = "win32" ]; then
+
+    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a "$path"/libtorrent.a
+    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll   "$path"
+fi
