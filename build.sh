@@ -34,6 +34,13 @@ fi
 # Configuration
 #--------------------------------------------------------------------------------------------------
 
+if [ $2 = "win32" -o $2 = "win64" ]; then
+
+    windows=true
+else
+    windows=false
+fi
+
 MinGW="$external/$1/MinGW/$MinGW_versionA"
 
 #--------------------------------------------------------------------------------------------------
@@ -99,7 +106,7 @@ mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 # Build
 #--------------------------------------------------------------------------------------------------
 
-if [ $1 = "win32" ]; then
+if [ $windows = true ]; then
 
     cmd < build.bat
 fi
@@ -121,7 +128,9 @@ if [ $1 = "win32" ]; then
 
     cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x32-$Boost_versionC.dll \
     "$path"/libboost_system.dll
-else
+
+elif [ $1 = "win64" ]; then
+
     cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x64-$Boost_versionC.dll.a \
     "$path"/libboost_system.a
 
@@ -137,7 +146,7 @@ mkdir -p "$path"
 
 cp -r libtorrent/include/libtorrent "$path"
 
-if [ $1 = "win32" ]; then
+if [ $windows = true ]; then
 
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a "$path"/libtorrent.a
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll   "$path"
