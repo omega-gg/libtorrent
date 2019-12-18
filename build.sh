@@ -164,10 +164,13 @@ cp -r libtorrent/include/libtorrent "$path"
 
 if [ $windows = true ]; then
 
-    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a "$path"/libtorrent.a
-    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll   "$path"
+    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a \
+    "$path"/libtorrent.a
+
+    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll "$path"
 
 elif [ $1 = "macOS" ]; then
 
-    cp libtorrent/bin/darwin-4.2.1/release/threading-multi/libtorrent.dylib "$path"
+    cp libtorrent/bin/darwin-4.2.1/release/threading-multi/libtorrent.$libtorrent_versionA.dylib \
+    "$path"/libtorrent.dylib
 fi
