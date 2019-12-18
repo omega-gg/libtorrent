@@ -20,6 +20,11 @@ Boost_versionB="1_71_0"
 Boost_versionC="1_71"
 
 #--------------------------------------------------------------------------------------------------
+# macOS
+
+darwin_version="4.2.1"
+
+#--------------------------------------------------------------------------------------------------
 # Syntax
 #--------------------------------------------------------------------------------------------------
 
@@ -150,7 +155,7 @@ elif [ $1 = "win64" ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp boost/bin.v2/libs/system/build/darwin-4.2.1/release/threading-multi/visibility-hidden/libboost_system.dylib \
+    cp boost/bin.v2/libs/system/build/darwin-$darwin_version/release/threading-multi/visibility-hidden/libboost_system.dylib \
     "$path"/libboost_system.dylib
 fi
 
@@ -171,6 +176,6 @@ if [ $windows = true ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp libtorrent/bin/darwin-4.2.1/release/threading-multi/libtorrent.$libtorrent_versionA.dylib \
+    cp libtorrent/bin/darwin-$darwin_version/release/threading-multi/libtorrent.dylib.$libtorrent_versionA \
     "$path"/libtorrent.dylib
 fi
