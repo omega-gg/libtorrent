@@ -117,7 +117,9 @@ mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 
 if [ $windows = true ]; then
 
-    cmd < build.bat
+    cmd < window/build.bat
+else
+    sh unix/build.sh
 fi
 
 #--------------------------------------------------------------------------------------------------
@@ -145,6 +147,11 @@ elif [ $1 = "win64" ]; then
 
     cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x64-$Boost_versionC.dll \
     "$path"/libboost_system.dll
+
+elif [ $1 = "macOS" ]; then
+
+    cp boost/bin.v2/libs/system/build/darwin-4.2.1/release/threading-multi/visibility-hidden/libboost_system.dylib \
+    "$path"/libboost_system.dylib
 fi
 
 #--------------------------------------------------------------------------------------------------
@@ -159,4 +166,8 @@ if [ $windows = true ]; then
 
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a "$path"/libtorrent.a
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll   "$path"
+
+elif [ $1 = "macOS" ]; then
+
+    cp libtorrent/bin/darwin-4.2.1/release/threading-multi/libtorrent.dylib "$path"
 fi
