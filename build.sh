@@ -56,11 +56,6 @@ libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$l
 #--------------------------------------------------------------------------------------------------
 
 echo ""
-echo "DOWNLOADING 3rdparty"
-echo $thirdparty
-curl -L -o ../3rdparty.zip $thirdparty
-
-echo ""
 echo "DOWNLOADING boost"
 echo $boost
 curl -L -o boost.zip $boost
@@ -70,15 +65,26 @@ echo "DOWNLOADING libtorrent"
 echo $libtorrent
 curl -L -o libtorrent.tar.gz $libtorrent
 
+if [ $windows = true ]; then
+
+    echo ""
+    echo "DOWNLOADING 3rdparty"
+    echo $thirdparty
+    curl -L -o ../3rdparty.zip $thirdparty
+fi
+
 #--------------------------------------------------------------------------------------------------
 # 3rdparty
 #--------------------------------------------------------------------------------------------------
 
-cd ..
+if [ $windows = true ]; then
 
-unzip 3rdparty.zip
+    cd ..
 
-cd -
+    unzip 3rdparty.zip
+
+    cd -
+fi
 
 #--------------------------------------------------------------------------------------------------
 # MinGW
