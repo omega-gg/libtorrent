@@ -117,7 +117,7 @@ mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 
 if [ $windows = true ]; then
 
-    cmd < window/build.bat
+    cmd < windows/build.bat
 else
     sh unix/build.sh
 fi
