@@ -80,7 +80,7 @@ if [ $windows = true ]; then
     echo ""
     echo "DOWNLOADING 3rdparty"
     echo $thirdparty
-    curl -L -o ../3rdparty.zip $thirdparty
+    curl -L -o ../3rdparty.zip --retry 3 $thirdparty
 fi
 
 #--------------------------------------------------------------------------------------------------
