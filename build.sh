@@ -86,7 +86,7 @@ if [ $windows = true ]; then
 
     cd ..
 
-    unzip 3rdparty.zip
+    unzip -q 3rdparty.zip
 
     cd -
 fi
@@ -104,7 +104,7 @@ fi
 # Boost
 #--------------------------------------------------------------------------------------------------
 
-unzip boost.zip
+unzip -q boost.zip
 
 mv boost_$Boost_versionB boost
 
