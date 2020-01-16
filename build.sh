@@ -20,6 +20,11 @@ Boost_versionB="1_71_0"
 Boost_versionC="1_71"
 
 #--------------------------------------------------------------------------------------------------
+# linux
+
+gcc_version="7"
+
+#--------------------------------------------------------------------------------------------------
 # macOS
 
 darwin_version="4.2.1"
@@ -155,7 +160,8 @@ elif [ $1 = "win64" ]; then
 
 elif [ $1 = "linux" ]; then
 
-    cp -r boost/bin.v2 "$path"
+    cp boost/bin.v2/libs/system/build/gcc-$gcc_version/release/threading-multi/visibility-hidden/libboost_system.so.$Boost_versionA \
+    "$path"/libboost_system.so
 
 elif [ $1 = "macOS" ]; then
 
@@ -180,7 +186,8 @@ if [ $windows = true ]; then
 
 elif [ $1 = "linux" ]; then
 
-    cp -r libtorrent/bin "$path"
+    cp libtorrent/bin/gcc-$gcc_version/release/threading-multi/libtorrent.so.$libtorrent_versionA \
+    "$path"/libtorrent.so
 
 elif [ $1 = "macOS" ]; then
 
