@@ -3,33 +3,67 @@
 #--------------------------------------------------------------------------------------------------
 
 jobs:
-- job: win32
-  pool:
-    vmImage: "windows-latest"
-  steps:
-  - bash: |
-      sh build.sh win32
-  - publish: $(System.DefaultWorkingDirectory)/deploy
-    artifact: libtorrent-win32
+#- job: win32
+#  pool:
+#    vmImage: "windows-latest"
+#  steps:
+#  - bash: |
+#      sh build.sh win32
+#  - publish: $(System.DefaultWorkingDirectory)/deploy
+#    artifact: libtorrent-win32
 
-- job: win64
-  pool:
-    vmImage: "windows-latest"
-  steps:
-  - bash: |
-      sh build.sh win64
-  - publish: $(System.DefaultWorkingDirectory)/deploy
-    artifact: libtorrent-win64
+#- job: win64
+#  pool:
+#    vmImage: "windows-latest"
+#  steps:
+#  - bash: |
+#      sh build.sh win64
+#  - publish: $(System.DefaultWorkingDirectory)/deploy
+#    artifact: libtorrent-win64
 
 #--------------------------------------------------------------------------------------------------
 # macOS
 #--------------------------------------------------------------------------------------------------
 
-- job: macOS
+#- job: macOS
+#  pool:
+#    vmImage: "macOS-latest"
+#  steps:
+#  - bash: |
+#      sh build.sh macOS
+#  - publish: $(System.DefaultWorkingDirectory)/deploy
+#    artifact: libtorrent-macOS
+
+#--------------------------------------------------------------------------------------------------
+# Linux
+#--------------------------------------------------------------------------------------------------
+
+- job: linux32
   pool:
-    vmImage: "macOS-latest"
+    vmImage: "ubuntu-latest"
   steps:
   - bash: |
-      sh build.sh macOS
+      docker run -d --name ubuntu -v $PWD:/libtorrent i386/ubuntu:18.04 tail -f /dev/null
+      docker exec -t ubuntu bash -c "cd /libtorrent/..;
+                                     apt-get update;
+                                     apt-get -y install sudo wget git;
+                                     git clone https://github.com/omega-gg/libtorrent;
+                                     cd libtorrent;
+                                     sh build.sh linux"
   - publish: $(System.DefaultWorkingDirectory)/deploy
-    artifact: libtorrent-macOS
+    artifact: libtorrent-linux32
+
+#- job: linux64
+#  pool:
+#    vmImage: "ubuntu-latest"
+#  steps:
+#  - bash: |
+#      docker run -d --name ubuntu -v $PWD:/libtorrent i386/ubuntu:18.04 tail -f /dev/null
+#      docker exec -t ubuntu bash -c "cd /libtorrent/..;
+#                                     apt-get update;
+#                                     apt-get -y install sudo wget git;
+#                                     git clone https://github.com/omega-gg/libtorrent;
+#                                     cd libtorrent;
+#                                     sh build.sh linux"
+#  - publish: $(System.DefaultWorkingDirectory)/deploy
+#    artifact: libtorrent-linux64

@@ -28,9 +28,9 @@ darwin_version="4.2.1"
 # Syntax
 #--------------------------------------------------------------------------------------------------
 
-if [ $# != 1 ] || [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" ]; then
+if [ $# != 1 ] || [ $1 != "win32" -a $1 != "win64" -a $1 != "linux" -a $1 != "macOS" ]; then
 
-    echo "Usage: configure <win32 | win64 | macOS>"
+    echo "Usage: configure <win32 | win64 | linux | macOS>"
 
     exit 1
 fi
@@ -153,6 +153,10 @@ elif [ $1 = "win64" ]; then
     cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x64-$Boost_versionC.dll \
     "$path"/libboost_system.dll
 
+elif [ $1 = "linux" ]; then
+
+    cp -r boost/bin.v2 "$path"
+
 elif [ $1 = "macOS" ]; then
 
     cp boost/bin.v2/libs/system/build/darwin-$darwin_version/release/threading-multi/visibility-hidden/libboost_system.dylib \
@@ -173,6 +177,10 @@ if [ $windows = true ]; then
     "$path"/libtorrent.a
 
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll "$path"
+
+elif [ $1 = "linux" ]; then
+
+    cp -r libtorrent/bin "$path"
 
 elif [ $1 = "macOS" ]; then
 
