@@ -66,19 +66,19 @@ libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$l
 #--------------------------------------------------------------------------------------------------
 
 echo ""
-echo "DOWNLOADING boost"
+echo "DOWNLOAD boost"
 echo $boost
 curl -L -o boost.zip $boost
 
 echo ""
-echo "DOWNLOADING libtorrent"
+echo "DOWNLOAD libtorrent"
 echo $libtorrent
 curl -L -o libtorrent.tar.gz $libtorrent
 
 if [ $windows = true ]; then
 
     echo ""
-    echo "DOWNLOADING 3rdparty"
+    echo "DOWNLOAD 3rdparty"
     echo $thirdparty
     curl -L -o ../3rdparty.zip --retry 3 $thirdparty
 fi
