@@ -1,5 +1,5 @@
 OTHER_FILES += build.sh \
-               build.bat \
                README.md \
                .azure-pipelines.yml \
+               windows/build.bat \
                unix/build.sh \

@@ -35,7 +35,7 @@ darwin_version="4.2.1"
 
 if [ $# != 1 ] || [ $1 != "win32" -a $1 != "win64" -a $1 != "linux" -a $1 != "macOS" ]; then
 
-    echo "Usage: configure <win32 | win64 | linux | macOS>"
+    echo "Usage: build <win32 | win64 | linux | macOS>"
 
     exit 1
 fi
