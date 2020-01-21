@@ -62,6 +62,15 @@ boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boo
 libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz"
 
 #--------------------------------------------------------------------------------------------------
+# Install
+#--------------------------------------------------------------------------------------------------
+
+if [ $1 = "linux" ]; then
+
+    apt-get -y install build-essential curl unzip
+fi
+
+#--------------------------------------------------------------------------------------------------
 # Download
 #--------------------------------------------------------------------------------------------------
 
