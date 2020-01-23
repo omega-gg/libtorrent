@@ -1,8 +1,8 @@
-PATH=$(pwd)/boost/tools/build/src/engine:$(pwd)/boost:$PATH
+PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
 
-export BOOST_BUILD_PATH=$(pwd)/boost/tools/build/src
+export BOOST_BUILD_PATH=$PWD/boost/tools/build/src
 
-export BOOST_ROOT=$(pwd)/boost
+export BOOST_ROOT=$PWD/boost
 
 cd boost/tools/build/src/engine
 
