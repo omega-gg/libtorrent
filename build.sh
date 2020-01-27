@@ -33,9 +33,11 @@ darwin_version="4.2.1"
 # Syntax
 #--------------------------------------------------------------------------------------------------
 
-if [ $# != 1 ] || [ $1 != "win32" -a $1 != "win64" -a $1 != "linux" -a $1 != "macOS" ]; then
+if [ $# != 1 ] \
+   || \
+   [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" -a $1 != "linux" -a $1 != "android" ]; then
 
-    echo "Usage: build <win32 | win64 | linux | macOS>"
+    echo "Usage: build <win32 | win64 | macOS | linux | android>"
 
     exit 1
 fi
