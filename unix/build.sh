@@ -6,8 +6,8 @@ export BOOST_ROOT=$PWD/boost
 
 cd boost/tools/build/src/engine
 
-sh build.sh $1
+sh build.sh gcc
 
 cd ../../../../../libtorrent
 
-b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+b2 $1 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1

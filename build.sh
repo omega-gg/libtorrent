@@ -161,7 +161,7 @@ if [ $windows = true ]; then
 
 elif [ $1 = "android" ]; then
 
-    sh unix/build.sh clang
+    sh unix/build.sh clang-arm
 else
     sh unix/build.sh gcc
 fi
