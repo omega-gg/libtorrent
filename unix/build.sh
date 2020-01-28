@@ -10,4 +10,9 @@ sh build.sh gcc
 
 cd ../../../../../libtorrent
 
-b2 $1 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+elif [ $# = 1 ]; then
+
+    b2 $1 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+else
+    b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+fi

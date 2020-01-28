@@ -163,7 +163,7 @@ elif [ $1 = "android" ]; then
 
     sh unix/build.sh clang-arm
 else
-    sh unix/build.sh gcc
+    sh unix/build.sh
 fi
 
 #--------------------------------------------------------------------------------------------------
