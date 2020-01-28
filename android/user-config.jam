@@ -1,5 +1,5 @@
-import os;
+import os ;
 
-COMPILER = [ os.environ COMPILER ];
+COMPILER = [ os.environ COMPILER ] ;
 
-using clang : arm : $COMPILER
+using clang : arm : $COMPILER ;
