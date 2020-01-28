@@ -72,7 +72,7 @@ libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$l
 # Install
 #--------------------------------------------------------------------------------------------------
 
-if [ $1 = "linux" ]; then
+if [ $1 = "linux" ] || [ $1 = "android" ]; then
 
     apt-get -y install build-essential curl unzip
 fi
