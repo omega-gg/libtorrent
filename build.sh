@@ -167,9 +167,11 @@ else
 
     cd boost/tools/build/src/engine
 
+    ls -la
+
     sh build.sh gcc
 
-    cd -
+    cd ../../../../../libtorrent
 fi
 
 if [ $1 = "android" ]; then
