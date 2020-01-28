@@ -6,7 +6,7 @@ export BOOST_ROOT=$PWD/boost
 
 cd boost/tools/build/src/engine
 
-sh build.sh gcc
+sh build.sh $1
 
 cd ../../../../../libtorrent
 

@@ -3,3 +3,4 @@ OTHER_FILES += build.sh \
                .azure-pipelines.yml \
                windows/build.bat \
                unix/build.sh \
+               android/user-config.jam \
