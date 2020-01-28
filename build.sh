@@ -172,9 +172,9 @@ fi
 
 path="deploy/Boost/$Boost_versionA"
 
-mkdir -p "$path"
+mkdir -p $path
 
-cp -r boost/boost "$path"/Boost
+cp -r boost/boost $path/Boost
 
 if [ $1 = "win32" ]; then
 
@@ -207,9 +207,9 @@ fi
 
 path="deploy/libtorrent/$libtorrent_versionA"
 
-mkdir -p "$path"
+mkdir -p $path
 
-cp -r libtorrent/include/libtorrent "$path"
+cp -r libtorrent/include/libtorrent $path
 
 if [ $windows = true ]; then
 
