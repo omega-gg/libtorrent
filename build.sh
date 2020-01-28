@@ -146,7 +146,7 @@ mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 
 if [ $1 = "android" ]; then
 
-    export COMPILER="$external"/NDK/$NDK_version/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
+    export COMPILER="$external"/android/NDK/$NDK_version/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
 
     cp android/user-config.jam boost/tools/build/src
 fi
