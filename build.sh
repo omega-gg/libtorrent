@@ -62,7 +62,7 @@ MinGW="$external/$1/MinGW/$MinGW_versionA"
 
 #--------------------------------------------------------------------------------------------------
 
-thirdparty="http://omega.gg/get/Sky/3rdparty/$1"
+thirdparty="https://github.com/omega-gg/3rdparty"
 
 boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
 
@@ -93,24 +93,17 @@ echo $libtorrent
 
 curl -L -o libtorrent.tar.gz $libtorrent
 
-if [ $windows = true ]; then
-
-    echo ""
-    echo "DOWNLOADING 3rdparty"
-    echo $thirdparty
-
-    curl -L -o ../3rdparty.zip --retry 3 $thirdparty
-fi
-
 #--------------------------------------------------------------------------------------------------
 # 3rdparty
 #--------------------------------------------------------------------------------------------------
 
 if [ $windows = true ]; then
 
-    cd ..
+    git clone $thirdparty ../3rdparty
 
-    unzip -q 3rdparty.zip
+    cd ../3rdparty
+
+    sh generate.sh $1
 
     cd -
 fi
