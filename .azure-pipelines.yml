@@ -72,7 +72,7 @@ jobs:
 # Android
 #--------------------------------------------------------------------------------------------------
 
-- job: android
+- job: android32
   pool:
     vmImage: "ubuntu-latest"
   steps:
@@ -86,6 +86,24 @@ jobs:
                                      cd 3rdparty;
                                      bash generate.sh android32;
                                      cd ../libtorrent;
-                                     sh build.sh android"
+                                     sh build.sh android32"
+  - publish: $(System.DefaultWorkingDirectory)/deploy
+    artifact: libtorrent-android
+
+- job: android64
+  pool:
+    vmImage: "ubuntu-latest"
+  steps:
+  - bash: |
+      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
+      docker exec -t ubuntu bash -c "cd /libtorrent/..;
+                                     apt-get update;
+                                     apt-get -y install sudo curl unzip git;
+                                     git clone https://github.com/omega-gg/3rdparty;
+                                     git clone https://github.com/omega-gg/libtorrent;
+                                     cd 3rdparty;
+                                     bash generate.sh android64;
+                                     cd ../libtorrent;
+                                     sh build.sh android64"
   - publish: $(System.DefaultWorkingDirectory)/deploy
     artifact: libtorrent-android
