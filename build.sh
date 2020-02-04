@@ -65,7 +65,7 @@ else
     os=""
 fi
 
-MinGW="$external/$1/MinGW/$MinGW_versionA"
+MinGW="$external/MinGW/$MinGW_versionA"
 
 NDK="$external/NDK/$NDK_version"
 
