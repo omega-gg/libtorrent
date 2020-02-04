@@ -150,11 +150,16 @@ fi
 # Build
 #--------------------------------------------------------------------------------------------------
 
-if [ $os = "windows" ]; then
+#if [ $os = "windows" ]; then
 
-    cmd < windows/build.bat
-else
-    PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+#    cmd < windows/build.bat
+#else
+    if [ $os = "windows" ]; then
+
+        PATH=$PWD/MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+    else
+        PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+    fi
 
     export BOOST_BUILD_PATH=$PWD/boost/tools/build/src
 
@@ -166,7 +171,11 @@ else
 
     cd ../../../../../libtorrent
 
-    if [ $os = "android" ]; then
+    if [ $os = "windows" ]; then
+
+        b2.exe -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+
+    elif [ $os = "android" ]; then
 
         b2 clang-arm -j4 cxxflags=-std=c++11 variant=release link=static openssl-version=pre1.1
     else
@@ -174,7 +183,7 @@ else
     fi
 
     cd ..
-fi
+#fi
 
 #--------------------------------------------------------------------------------------------------
 # Deploy
