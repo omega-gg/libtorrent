@@ -88,7 +88,7 @@ jobs:
                                      cd ../libtorrent;
                                      sh build.sh android32"
   - publish: $(System.DefaultWorkingDirectory)/deploy
-    artifact: libtorrent-android
+    artifact: libtorrent-android32
 
 - job: android64
   pool:
@@ -106,4 +106,4 @@ jobs:
                                      cd ../libtorrent;
                                      sh build.sh android64"
   - publish: $(System.DefaultWorkingDirectory)/deploy
-    artifact: libtorrent-android
+    artifact: libtorrent-android64
