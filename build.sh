@@ -62,8 +62,6 @@ MinGW="$external/$1/MinGW/$MinGW_versionA"
 
 #--------------------------------------------------------------------------------------------------
 
-thirdparty="https://github.com/omega-gg/3rdparty"
-
 boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
 
 libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz"
@@ -92,21 +90,6 @@ echo "DOWNLOADING libtorrent"
 echo $libtorrent
 
 curl -L -o libtorrent.tar.gz $libtorrent
-
-#--------------------------------------------------------------------------------------------------
-# 3rdparty
-#--------------------------------------------------------------------------------------------------
-
-if [ $windows = true ]; then
-
-    git clone $thirdparty ../3rdparty
-
-    cd ../3rdparty
-
-    sh generate.sh $1
-
-    cd -
-fi
 
 #--------------------------------------------------------------------------------------------------
 # MinGW
