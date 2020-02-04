@@ -81,7 +81,7 @@ libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$l
 
 if [ $1 = "linux" ] || [ $os = "android" ]; then
 
-    apt-get -y install build-essential curl unzip
+    sudo apt-get -y install build-essential curl unzip
 
     echo ""
 fi
@@ -114,6 +114,8 @@ fi
 # Boost
 #--------------------------------------------------------------------------------------------------
 
+test -d boost && rm -rf boost
+
 unzip -q boost.zip
 
 mv boost_$Boost_versionB boost
@@ -121,6 +123,8 @@ mv boost_$Boost_versionB boost
 #--------------------------------------------------------------------------------------------------
 # libtorrent
 #--------------------------------------------------------------------------------------------------
+
+test -d libtorrent && rm -rf libtorrent
 
 tar -xf libtorrent.tar.gz
 
