@@ -67,6 +67,8 @@ fi
 
 MinGW="$external/$1/MinGW/$MinGW_versionA"
 
+NDK="$external/NDK/$NDK_version"
+
 #--------------------------------------------------------------------------------------------------
 
 boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
@@ -77,16 +79,17 @@ libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$l
 # Install
 #--------------------------------------------------------------------------------------------------
 
-if [ $1 = "linux" ] || [ $1 = "android" ]; then
+if [ $1 = "linux" ] || [ $os = "android" ]; then
 
     apt-get -y install build-essential curl unzip
+
+    echo ""
 fi
 
 #--------------------------------------------------------------------------------------------------
 # Download
 #--------------------------------------------------------------------------------------------------
 
-echo ""
 echo "DOWNLOADING boost"
 echo $boost
 
@@ -131,9 +134,9 @@ if [ $os = "android" ]; then
 
     if [ $1 = "android32" ]; then
 
-        export COMPILER="$external"/android/NDK/$NDK_version/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
+        export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
     else
-        export COMPILER="$external"/android/NDK/$NDK_version/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
+        export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
     fi
 
     cp android/user-config.jam boost/tools/build/src
