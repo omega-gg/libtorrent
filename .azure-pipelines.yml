@@ -54,35 +54,39 @@ jobs:
 # Linux
 #--------------------------------------------------------------------------------------------------
 
-#- job: linux32
-#  pool:
-#    vmImage: "ubuntu-latest"
-#  steps:
-#  - bash: |
-#      docker run -d --name ubuntu -v $PWD:/libtorrent i386/ubuntu:18.04 tail -f /dev/null
-#      docker exec -t ubuntu bash -c "cd /libtorrent/..;
-#                                     apt-get update;
-#                                     apt-get -y install sudo git;
-#                                     git clone https://github.com/omega-gg/libtorrent;
-#                                     cd libtorrent;
-#                                     sh build.sh linux"
-#  - publish: $(System.DefaultWorkingDirectory)/deploy
-#    artifact: libtorrent-linux32
+- job: linux32
+  pool:
+    vmImage: "ubuntu-latest"
+  steps:
+  - bash: |
+      docker run -d --name ubuntu -v $PWD:/libtorrent i386/ubuntu:18.04 tail -f /dev/null
+      docker exec -t ubuntu bash -c "cd /libtorrent/..;
+                                     apt-get update;
+                                     apt-get -y install sudo zip git;
+                                     git clone https://github.com/omega-gg/libtorrent;
+                                     cd libtorrent;
+                                     sh build.sh linux;
+                                     cd deploy;
+                                     zip -r ../deploy.zip *"
+  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+    artifact: libtorrent-linux32
 
-#- job: linux64
-#  pool:
-#    vmImage: "ubuntu-latest"
-#  steps:
-#  - bash: |
-#      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
-#      docker exec -t ubuntu bash -c "cd /libtorrent/..;
-#                                     apt-get update;
-#                                     apt-get -y install sudo git;
-#                                     git clone https://github.com/omega-gg/libtorrent;
-#                                     cd libtorrent;
-#                                     sh build.sh linux"
-#  - publish: $(System.DefaultWorkingDirectory)/deploy
-#    artifact: libtorrent-linux64
+- job: linux64
+  pool:
+    vmImage: "ubuntu-latest"
+  steps:
+  - bash: |
+      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
+      docker exec -t ubuntu bash -c "cd /libtorrent/..;
+                                     apt-get update;
+                                     apt-get -y install sudo zip git;
+                                     git clone https://github.com/omega-gg/libtorrent;
+                                     cd libtorrent;
+                                     sh build.sh linux;
+                                     cd deploy;
+                                     zip -r ../deploy.zip *"
+  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+    artifact: libtorrent-linux64
 
 #--------------------------------------------------------------------------------------------------
 # Android
@@ -96,7 +100,7 @@ jobs:
       docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
       docker exec -t ubuntu bash -c "cd /libtorrent/..;
                                      apt-get update;
-                                     apt-get -y install sudo curl unzip git;
+                                     apt-get -y install sudo curl zip unzip git;
                                      git clone https://github.com/omega-gg/3rdparty;
                                      git clone https://github.com/omega-gg/libtorrent;
                                      cd 3rdparty;
@@ -116,7 +120,7 @@ jobs:
       docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
       docker exec -t ubuntu bash -c "cd /libtorrent/..;
                                      apt-get update;
-                                     apt-get -y install sudo curl unzip git;
+                                     apt-get -y install sudo curl zip unzip git;
                                      git clone https://github.com/omega-gg/3rdparty;
                                      git clone https://github.com/omega-gg/libtorrent;
                                      cd 3rdparty;
