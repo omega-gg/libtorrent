@@ -1,3 +1,5 @@
+#!/bin/sh
+
 PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
 
 export BOOST_BUILD_PATH=$PWD/boost/tools/build/src
