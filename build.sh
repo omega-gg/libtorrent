@@ -171,15 +171,11 @@ fi
 
     cd ../../../../../libtorrent
 
-    if [ $os = "windows" ]; then
-
-        b2.exe -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
-
-    elif [ $os = "android" ]; then
+    if [ $os = "android" ]; then
 
         b2 clang-arm -j4 cxxflags=-std=c++11 variant=release link=static openssl-version=pre1.1
     else
-        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+        b2 gcc -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
     fi
 
     cd ..
