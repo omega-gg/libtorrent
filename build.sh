@@ -187,15 +187,20 @@ elif [ $1 = "win64" ]; then
     cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x64-$Boost_versionC.dll \
     "$path"/libboost_system.dll
 
+elif [ $1 = "macOS" ]; then
+
+    cp boost/bin.v2/libs/system/build/darwin-$darwin_version/release/threading-multi/visibility-hidden/libboost_system.dylib \
+    "$path"/libboost_system.dylib
+
 elif [ $1 = "linux" ]; then
 
     cp boost/bin.v2/libs/system/build/gcc-$gcc_version/release/threading-multi/visibility-hidden/libboost_system.so.$Boost_versionA \
     "$path"/libboost_system.so
 
-elif [ $1 = "macOS" ]; then
+elif [ $os = "android" ]; then
 
-    cp boost/bin.v2/libs/system/build/darwin-$darwin_version/release/threading-multi/visibility-hidden/libboost_system.dylib \
-    "$path"/libboost_system.dylib
+    cp boost/bin.v2/libs/system/build/clang-linux-arm/release/link-static/visibility-hidden/libboost_system.a \
+    "$path"
 fi
 
 #--------------------------------------------------------------------------------------------------
@@ -213,13 +218,17 @@ if [ $os = "windows" ]; then
 
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll "$path"
 
+elif [ $1 = "macOS" ]; then
+
+    cp libtorrent/bin/darwin-$darwin_version/release/threading-multi/libtorrent.dylib.$libtorrent_versionA \
+    "$path"/libtorrent.dylib
+
 elif [ $1 = "linux" ]; then
 
     cp libtorrent/bin/gcc-$gcc_version/release/threading-multi/libtorrent.so.$libtorrent_versionA \
     "$path"/libtorrent.so
 
-elif [ $1 = "macOS" ]; then
+elif [ $os = "android" ]; then
 
-    cp libtorrent/bin/darwin-$darwin_version/release/threading-multi/libtorrent.dylib.$libtorrent_versionA \
-    "$path"/libtorrent.dylib
+    cp libtorrent/bin/clang-linux-arm/release/threading-multi/libtorrent.a "$path"
 fi
