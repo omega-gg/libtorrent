@@ -230,5 +230,5 @@ elif [ $1 = "linux" ]; then
 
 elif [ $os = "android" ]; then
 
-    cp libtorrent/bin/clang-linux-arm/release/link-static/libtorrent.a "$path"
+    cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent.a "$path"
 fi
