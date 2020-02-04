@@ -168,7 +168,7 @@ else
 
     if [ $os = "android" ]; then
 
-        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+        b2 clang-arm -j4 cxxflags=-std=c++11 variant=release link=static openssl-version=pre1.1
     else
         b2 -j4 cxxflags=-std=c++11 variant=release link=static openssl-version=pre1.1
     fi
