@@ -40,9 +40,10 @@ NDK_version="21"
 
 if [ $# != 1 ] \
    || \
-   [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" -a $1 != "linux" -a $1 != "android" ]; then
+   [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" -a $1 != "linux" -a $1 != "android32" -a \
+                                                                         $1 != "android64" ]; then
 
-    echo "Usage: build <win32 | win64 | macOS | linux | android>"
+    echo "Usage: build <win32 | win64 | macOS | linux | android32 | android64>"
 
     exit 1
 fi
@@ -53,9 +54,13 @@ fi
 
 if [ $1 = "win32" -o $1 = "win64" ]; then
 
-    windows=true
+    os="windows"
+
+elif [ $1 = "android32" -o $1 = "android64" ]; then
+
+    os="android"
 else
-    windows=false
+    os=""
 fi
 
 MinGW="$external/$1/MinGW/$MinGW_versionA"
@@ -95,7 +100,7 @@ curl -L -o libtorrent.tar.gz $libtorrent
 # MinGW
 #--------------------------------------------------------------------------------------------------
 
-if [ $windows = true ]; then
+if [ $os = "windows" ]; then
 
     cp -r "$MinGW" MinGW
 fi
@@ -120,9 +125,14 @@ mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 # Boost configuration
 #--------------------------------------------------------------------------------------------------
 
-if [ $1 = "android" ]; then
+if [ $os = "android" ]; then
 
-    export COMPILER="$external"/android/NDK/$NDK_version/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
+    if [ $1 = "android32" ]; then
+
+        export COMPILER="$external"/android/NDK/$NDK_version/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
+    else
+        export COMPILER="$external"/android/NDK/$NDK_version/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
+    fi
 
     cp android/user-config.jam boost/tools/build/src
 fi
@@ -131,11 +141,11 @@ fi
 # Build
 #--------------------------------------------------------------------------------------------------
 
-if [ $windows = true ]; then
+if [ $os = "windows" ]; then
 
     cmd < windows/build.bat
 
-elif [ $1 = "android" ]; then
+elif [ $os = "android" ]; then
 
     sh android/build.sh
 else
@@ -187,7 +197,7 @@ mkdir -p $path
 
 cp -r libtorrent/include/libtorrent $path
 
-if [ $windows = true ]; then
+if [ $os = "windows" ]; then
 
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a \
     "$path"/libtorrent.a
