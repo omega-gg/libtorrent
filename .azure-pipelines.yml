@@ -14,8 +14,7 @@ jobs:
       bash generate.sh win32
       cd ../s
       sh build.sh win32
-      cd deploy
-      zip -r ../deploy.zip -r *
+      7z a deploy.zip deploy/*
   - publish: $(System.DefaultWorkingDirectory)/deploy.zip
     artifact: libtorrent-win32
 
