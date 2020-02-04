@@ -153,12 +153,27 @@ fi
 if [ $os = "windows" ]; then
 
     cmd < windows/build.bat
-
-elif [ $os = "android" ]; then
-
-    sh android/build.sh
 else
-    sh unix/build.sh
+    PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+
+    export BOOST_BUILD_PATH=$PWD/boost/tools/build/src
+
+    export BOOST_ROOT=$PWD/boost
+
+    cd boost/tools/build/src/engine
+
+    sh build.sh gcc
+
+    cd ../../../../../libtorrent
+
+    if [ $os = "android" ]; then
+
+        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+    else
+        b2 -j4 cxxflags=-std=c++11 variant=release link=static openssl-version=pre1.1
+    fi
+
+    cd ..
 fi
 
 #--------------------------------------------------------------------------------------------------
