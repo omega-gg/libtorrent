@@ -46,7 +46,7 @@ jobs:
   - bash: |
       sh build.sh macOS
       cd deploy
-      zip -r ../libtorrent.zip *
+      zip -rq ../libtorrent.zip *
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-macOS
 
@@ -67,7 +67,7 @@ jobs:
                                      cd libtorrent;
                                      sh build.sh linux;
                                      cd deploy;
-                                     zip -r ../libtorrent.zip *"
+                                     zip -rq ../libtorrent.zip *"
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-linux32
 
@@ -84,7 +84,7 @@ jobs:
                                      cd libtorrent;
                                      sh build.sh linux;
                                      cd deploy;
-                                     zip -r ../libtorrent.zip *"
+                                     zip -rq ../libtorrent.zip *"
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-linux64
 
@@ -108,7 +108,7 @@ jobs:
                                      cd ../libtorrent;
                                      sh build.sh android32;
                                      cd deploy;
-                                     zip -r ../libtorrent.zip *"
+                                     zip -rq ../libtorrent.zip *"
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-android32
 
@@ -128,6 +128,6 @@ jobs:
                                      cd ../libtorrent;
                                      sh build.sh android64;
                                      cd deploy;
-                                     zip -r ../libtorrent.zip *"
+                                     zip -rq ../libtorrent.zip *"
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-android64
