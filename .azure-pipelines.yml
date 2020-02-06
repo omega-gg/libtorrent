@@ -15,8 +15,8 @@ jobs:
       cd ../s
       sh build.sh win32
       cd deploy
-      7z a ../deploy.zip *
-  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+      7z a ../libtorrent.zip *
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-win32
 
 - job: win64
@@ -31,8 +31,8 @@ jobs:
       cd ../s
       sh build.sh win64
       cd deploy
-      7z a ../deploy.zip *
-  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+      7z a ../libtorrent.zip *
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-win64
 
 #--------------------------------------------------------------------------------------------------
@@ -46,8 +46,8 @@ jobs:
   - bash: |
       sh build.sh macOS
       cd deploy
-      zip -r ../deploy.zip *
-  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+      zip -r ../libtorrent.zip *
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-macOS
 
 #--------------------------------------------------------------------------------------------------
@@ -67,8 +67,8 @@ jobs:
                                      cd libtorrent;
                                      sh build.sh linux;
                                      cd deploy;
-                                     zip -r ../deploy.zip *"
-  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+                                     zip -r ../libtorrent.zip *"
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-linux32
 
 - job: linux64
@@ -84,8 +84,8 @@ jobs:
                                      cd libtorrent;
                                      sh build.sh linux;
                                      cd deploy;
-                                     zip -r ../deploy.zip *"
-  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+                                     zip -r ../libtorrent.zip *"
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-linux64
 
 #--------------------------------------------------------------------------------------------------
@@ -108,8 +108,8 @@ jobs:
                                      cd ../libtorrent;
                                      sh build.sh android32;
                                      cd deploy;
-                                     zip -r ../deploy.zip *"
-  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+                                     zip -r ../libtorrent.zip *"
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-android32
 
 - job: android64
@@ -128,6 +128,6 @@ jobs:
                                      cd ../libtorrent;
                                      sh build.sh android64;
                                      cd deploy;
-                                     zip -r ../deploy.zip *"
-  - publish: $(System.DefaultWorkingDirectory)/deploy.zip
+                                     zip -r ../libtorrent.zip *"
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-android64
