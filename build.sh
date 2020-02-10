@@ -184,6 +184,10 @@ cd ..
 # Deploy
 #--------------------------------------------------------------------------------------------------
 
+rm -rf deploy
+mkdir  deploy
+touch  deploy/.gitignore
+
 path="deploy/Boost/$Boost_versionA"
 
 mkdir -p $path
