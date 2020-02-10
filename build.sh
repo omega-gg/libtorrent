@@ -76,6 +76,16 @@ boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boo
 libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz"
 
 #--------------------------------------------------------------------------------------------------
+# Clean
+#--------------------------------------------------------------------------------------------------
+
+echo "CLEANING"
+
+rm -rf deploy
+mkdir  deploy
+touch  deploy/.gitignore
+
+#--------------------------------------------------------------------------------------------------
 # Install
 #--------------------------------------------------------------------------------------------------
 
@@ -184,9 +194,7 @@ cd ..
 # Deploy
 #--------------------------------------------------------------------------------------------------
 
-rm -rf deploy
-mkdir  deploy
-touch  deploy/.gitignore
+echo "DEPLOYING"
 
 path="deploy/Boost/$Boost_versionA"
 
