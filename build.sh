@@ -62,7 +62,7 @@ elif [ $1 = "android32" -o $1 = "android64" ]; then
 
     os="android"
 else
-    os=""
+    os="default"
 fi
 
 MinGW="$external/MinGW/$MinGW_versionA"
