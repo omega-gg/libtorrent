@@ -183,7 +183,8 @@ if [ $os = "windows" ]; then
 
 elif [ $os = "android" ]; then
 
-    b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC" variant=release link=static openssl-version=pre1.1
+    b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
+                                                                           openssl-version=pre1.1
 else
     b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 fi
