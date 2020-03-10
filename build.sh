@@ -209,6 +209,9 @@ elif [ $1 = "android" ]; then
 
     sh deploy.sh androidv7
 
+    rm -rf boost/bin.v2
+    rm -rf libtorrent/bin
+
     cd libtorrent
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
