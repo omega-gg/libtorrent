@@ -209,7 +209,7 @@ elif [ $1 = "android" ]; then
 
     sh deploy androidv7
 
-    cd ../libtorrent
+    cd libtorrent
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
 
