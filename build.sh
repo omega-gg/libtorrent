@@ -64,6 +64,8 @@ if [ $1 = "win32" -o $1 = "win64" ]; then
 elif [ $1 = "androidv7" -o $1 = "androidv8" -o $1 = "android32" -o $1 = "android64" ]; then
 
     os="android"
+
+    external="$PWD/../3rdparty/android64"
 else
     os="default"
 fi
