@@ -106,10 +106,7 @@ jobs:
                                      cd 3rdparty;
                                      sh generate.sh android64;
                                      cd ../libtorrent;
-                                     sh build.sh androidv7;
-                                     sh build.sh androidv8;
-                                     sh build.sh android32;
-                                     sh build.sh android64;
+                                     sh build.sh android;
                                      cd deploy;
                                      zip -rq ../libtorrent.zip *"
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
