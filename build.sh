@@ -231,13 +231,13 @@ elif [ $1 = "android" ]; then
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android29-clang++
 
-    buildAndroid androidv32
+    buildAndroid android32
 
     cd libtorrent
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang++
 
-    buildAndroid androidv64
+    buildAndroid android64
 else
     b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 
