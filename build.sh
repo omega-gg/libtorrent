@@ -209,16 +209,16 @@ elif [ $1 = "android" ]; then
 
     sh deploy.sh androidv7
 
-    #cd libtorrent
+    cd libtorrent
 
-    #export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
+    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
 
-    #b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
+    b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
                                                                            openssl-version=pre1.1
 
-    #cd ..
+    cd ..
 
-    #sh deploy androidv8
+    sh deploy androidv8
 else
     b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 
