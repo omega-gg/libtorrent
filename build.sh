@@ -223,13 +223,19 @@ elif [ $1 = "android" ]; then
 
     cd libtorrent
 
+    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
+
     $(buildAndroid androidv8)
 
     cd libtorrent
 
+    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android29-clang++
+
     $(buildAndroid androidv32)
 
     cd libtorrent
+
+    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang++
 
     $(buildAndroid androidv64)
 else
