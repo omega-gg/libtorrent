@@ -35,6 +35,23 @@ gcc_version="7"
 NDK_version="21"
 
 #--------------------------------------------------------------------------------------------------
+# Functions
+#--------------------------------------------------------------------------------------------------
+
+buildAndroid()
+{
+    b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
+                                                                           openssl-version=pre1.1
+
+    cd ..
+
+    sh deploy.sh $1
+
+    rm -rf boost/bin.v2
+    rm -rf libtorrent/bin
+}
+
+#--------------------------------------------------------------------------------------------------
 # Syntax
 #--------------------------------------------------------------------------------------------------
 
@@ -202,26 +219,19 @@ elif [ $1 = "android" ]; then
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
 
-    b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
-                                                                           openssl-version=pre1.1
-
-    cd ..
-
-    sh deploy.sh androidv7
-
-    rm -rf boost/bin.v2
-    rm -rf libtorrent/bin
+    $(buildAndroid androidv7)
 
     cd libtorrent
 
-    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
+    $(buildAndroid androidv8)
 
-    b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
-                                                                           openssl-version=pre1.1
+    cd libtorrent
 
-    cd ..
+    $(buildAndroid androidv32)
 
-    sh deploy androidv8
+    cd libtorrent
+
+    $(buildAndroid androidv64)
 else
     b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 
