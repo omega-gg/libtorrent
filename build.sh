@@ -40,10 +40,13 @@ NDK_version="21"
 
 if [ $# != 1 ] \
    || \
-   [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" -a $1 != "linux" -a $1 != "android32" -a \
+   [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" -a $1 != "linux" -a $1 != "androidv7" -a \
+                                                                         $1 != "androidv8" -a \
+                                                                         $1 != "android32" -a \
                                                                          $1 != "android64" ]; then
 
-    echo "Usage: build <win32 | win64 | macOS | linux | android32 | android64>"
+    echo \
+    "Usage: build <win32 | win64 | macOS | linux | androidv7 | androidv8 | android32 | android64>"
 
     exit 1
 fi
@@ -58,7 +61,7 @@ if [ $1 = "win32" -o $1 = "win64" ]; then
 
     os="windows"
 
-elif [ $1 = "android32" -o $1 = "android64" ]; then
+elif [ $1 = "androidv7" -o $1 = "androidv8" -o $1 = "android32" -o $1 = "android64" ]; then
 
     os="android"
 else
@@ -146,11 +149,21 @@ mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 
 if [ $os = "android" ]; then
 
-    if [ $1 = "android32" ]; then
+    if [ $1 = "androidv7" ]; then
 
         export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
-    else
+
+    elif [ $1 = "androidv8" ]; then
+
         export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
+
+    elif [ $1 = "android32" ]; then
+
+        export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android29-clang++
+
+    elif [ $1 = "android64" ]; then
+
+        export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang++
     fi
 
     cp android/user-config.jam boost/tools/build/src
@@ -232,7 +245,7 @@ elif [ $1 = "linux" ]; then
 elif [ $os = "android" ]; then
 
     cp boost/bin.v2/libs/system/build/clang-linux-arm/release/link-static/visibility-hidden/libboost_system.a \
-    "$path"
+    "$path"/libboost_system-$1.a
 fi
 
 #--------------------------------------------------------------------------------------------------
@@ -262,5 +275,6 @@ elif [ $1 = "linux" ]; then
 
 elif [ $os = "android" ]; then
 
-    cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent.a "$path"
+    cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent.a \
+    "$path"/libtorrent-$1.a
 fi
