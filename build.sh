@@ -219,7 +219,7 @@ elif [ $1 = "android" ]; then
     b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
                                                                            openssl-version=pre1.1
 
-    $(deployAndroid androidv7)
+    deployAndroid androidv7
 
     cd libtorrent
 
@@ -228,7 +228,7 @@ elif [ $1 = "android" ]; then
     b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
                                                                            openssl-version=pre1.1
 
-    $(deployAndroid androidv8)
+    deployAndroid androidv8
 
     cd libtorrent
 
@@ -237,7 +237,7 @@ elif [ $1 = "android" ]; then
     b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
                                                                            openssl-version=pre1.1
 
-    $(deployAndroid androidv32)
+    deployAndroid androidv32
 
     cd libtorrent
 
@@ -246,7 +246,7 @@ elif [ $1 = "android" ]; then
     b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
                                                                            openssl-version=pre1.1
 
-    $(deployAndroid androidv64)
+    deployAndroid androidv64
 else
     b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 
