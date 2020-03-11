@@ -51,6 +51,23 @@ if [ $1 = "win32" -o $1 = "win64" ]; then
 elif [ $1 = "androidv7" -o $1 = "androidv8" -o $1 = "android32" -o $1 = "android64" ]; then
 
     os="android"
+
+    if [ $1 = "androidv7" ]; then
+
+        abi="armeabi-v7a"
+
+    elif [ $1 = "androidv8" ]; then
+
+        abi="arm64-v8a"
+
+    elif [ $1 = "android32" ]; then
+
+        abi="x86"
+
+    elif [ $1 = "android64" ]; then
+
+        abi="x86_64"
+    fi
 else
     os="default"
 fi
@@ -96,7 +113,7 @@ elif [ $1 = "linux" ]; then
 elif [ $os = "android" ]; then
 
     cp boost/bin.v2/libs/system/build/clang-linux-arm/release/link-static/visibility-hidden/libboost_system.a \
-    "$path"/libboost_system-$1.a
+    "$path"/libboost_system_$abi.a
 fi
 
 #--------------------------------------------------------------------------------------------------
@@ -127,5 +144,5 @@ elif [ $1 = "linux" ]; then
 elif [ $os = "android" ]; then
 
     cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent.a \
-    "$path"/libtorrent-$1.a
+    "$path"/libtorrent_$abi.a
 fi

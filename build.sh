@@ -40,6 +40,12 @@ NDK_version="21"
 
 buildAndroid()
 {
+    cd boost/tools/build/src/engine
+
+    sh build.sh gcc
+
+    cd ../../../../../libtorrent
+
     b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
                                                                            openssl-version=pre1.1
 
@@ -201,45 +207,36 @@ export BOOST_BUILD_PATH=$PWD/boost/tools/build/src
 
 export BOOST_ROOT=$PWD/boost
 
-cd boost/tools/build/src/engine
-
-sh build.sh gcc
-
-cd ../../../../../libtorrent
-
-if [ $os = "windows" ]; then
-
-    b2 -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
-
-    cd ..
-
-    sh deploy.sh $1
-
-elif [ $1 = "android" ]; then
+if [ $1 = "android" ]; then
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
 
     buildAndroid androidv7
 
-    cd libtorrent
-
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
 
     buildAndroid androidv8
-
-    cd libtorrent
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android29-clang++
 
     buildAndroid android32
 
-    cd libtorrent
-
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang++
 
     buildAndroid android64
 else
-    b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+    cd boost/tools/build/src/engine
+
+    sh build.sh gcc
+
+    cd ../../../../../libtorrent
+
+    if [ $os = "windows" ]; then
+
+        b2 -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+    else
+        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+    fi
 
     cd ..
 
