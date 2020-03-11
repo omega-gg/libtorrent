@@ -53,8 +53,8 @@ buildAndroid()
 
     sh deploy.sh $1
 
-    # NOTE: We delete this to force a new architecture check.
-    rm -rf boost/libs/config/checks/architecture
+    # NOTE: We remove this folder to force a new architecture check.
+    rm -rf boost/libs/config/checks/architecture/bin
     rm -rf boost/bin.v2
 
     rm -rf libtorrent/bin
