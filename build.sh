@@ -40,14 +40,6 @@ NDK_version="21"
 
 buildAndroid()
 {
-    rm -rf boost
-
-    unzip -q boost.zip
-
-    mv boost_$Boost_versionB boost
-
-    cp android/user-config.jam boost/tools/build/src
-
     cd boost/tools/build/src/engine
 
     sh build.sh gcc
@@ -61,7 +53,10 @@ buildAndroid()
 
     sh deploy.sh $1
 
+    # NOTE: We delete this to force a new architecture check.
+    rm -rf boost/libs/config/checks/architecture
     rm -rf boost/bin.v2
+
     rm -rf libtorrent/bin
 }
 
