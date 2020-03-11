@@ -157,7 +157,14 @@ test -d boost && rm -rf boost
 
 unzip -q boost.zip
 
+rm boost.zip
+
 mv boost_$Boost_versionB boost
+
+if [ $1 = "android" ]; then
+
+    cp android/user-config.jam boost/tools/build/src
+fi
 
 #--------------------------------------------------------------------------------------------------
 # libtorrent
@@ -167,33 +174,9 @@ test -d libtorrent && rm -rf libtorrent
 
 tar -xf libtorrent.tar.gz
 
+rm libtorrent.tar.gz
+
 mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
-
-#--------------------------------------------------------------------------------------------------
-# Boost configuration
-#--------------------------------------------------------------------------------------------------
-
-if [ $1 = "android" ]; then
-
-#    if [ $1 = "androidv7" ]; then
-
-#        export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang++
-
-#    elif [ $1 = "androidv8" ]; then
-
-#        export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++
-
-#    elif [ $1 = "android32" ]; then
-
-#        export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android29-clang++
-
-#    elif [ $1 = "android64" ]; then
-
-#        export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang++
-#    fi
-
-    cp android/user-config.jam boost/tools/build/src
-fi
 
 #--------------------------------------------------------------------------------------------------
 # Build
