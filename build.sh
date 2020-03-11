@@ -40,6 +40,10 @@ NDK_version="21"
 
 buildAndroid()
 {
+    unzip -q boost.zip
+
+    mv boost_$Boost_versionB boost
+
     cd boost/tools/build/src/engine
 
     sh build.sh gcc
