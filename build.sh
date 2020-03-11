@@ -40,6 +40,8 @@ NDK_version="21"
 
 buildAndroid()
 {
+    rm -rf boost
+
     unzip -q boost.zip
 
     mv boost_$Boost_versionB boost
