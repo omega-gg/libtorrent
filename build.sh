@@ -46,6 +46,8 @@ buildAndroid()
 
     mv boost_$Boost_versionB boost
 
+    cp android/user-config.jam boost/tools/build/src
+
     cd boost/tools/build/src/engine
 
     sh build.sh gcc
