@@ -89,7 +89,7 @@ elif [ $1 = "android" ]; then
     os="default"
 
     # FIXME
-    external="$PWD/../3rdparty/android64"
+    external="$PWD/../3rdparty/android"
 else
     os="default"
 fi
