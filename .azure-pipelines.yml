@@ -104,8 +104,7 @@ jobs:
                                      git clone https://github.com/omega-gg/3rdparty;
                                      git clone https://github.com/omega-gg/libtorrent;
                                      cd 3rdparty;
-                                     sed -i 's|set -e|#set -e|g' generate.sh
-                                     sh generate.sh android build;
+                                     sh generate.sh android;
                                      cd ../libtorrent;
                                      sh build.sh android;
                                      cd deploy;
