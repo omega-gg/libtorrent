@@ -110,7 +110,7 @@ elif [ $1 = "linux" ]; then
     cp boost/bin.v2/libs/system/build/gcc-$gcc_version/release/threading-multi/visibility-hidden/libboost_system.so.$Boost_versionA \
     "$path"/libboost_system.so
 
-elif [ $os = "android" ]; then
+elif [ $1 = "android" ]; then
 
     cp boost/bin.v2/libs/system/build/clang-linux-arm/release/link-static/visibility-hidden/libboost_system.a \
     "$path"/libboost_system_$abi.a
@@ -141,7 +141,7 @@ elif [ $1 = "linux" ]; then
     cp libtorrent/bin/gcc-$gcc_version/release/threading-multi/libtorrent.so.$libtorrent_version \
     "$path"/libtorrent.so
 
-elif [ $os = "android" ]; then
+elif [ $1 = "android" ]; then
 
     cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent.a \
     "$path"/libtorrent_$abi.a
