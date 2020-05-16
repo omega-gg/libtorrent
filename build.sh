@@ -15,9 +15,9 @@ MinGW_versionB="73"
 libtorrent_versionA="1.2.6"
 libtorrent_versionB="1_2_6"
 
-Boost_versionA="1.73.0"
-Boost_versionB="1_73_0"
-Boost_versionC="1_73"
+Boost_versionA="1.71.0"
+Boost_versionB="1_71_0"
+Boost_versionC="1_71"
 
 #--------------------------------------------------------------------------------------------------
 # macOS
