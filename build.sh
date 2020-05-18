@@ -141,15 +141,6 @@ echo $libtorrent
 curl -L -o libtorrent.tar.gz $libtorrent
 
 #--------------------------------------------------------------------------------------------------
-# MinGW
-#--------------------------------------------------------------------------------------------------
-
-if [ $os = "windows" ]; then
-
-    cp -r "$MinGW" MinGW
-fi
-
-#--------------------------------------------------------------------------------------------------
 # Boost
 #--------------------------------------------------------------------------------------------------
 
@@ -184,7 +175,7 @@ mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 
 if [ $os = "windows" ]; then
 
-    PATH=$PWD/MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+    PATH=$MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
 else
     PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
 fi
@@ -220,11 +211,6 @@ else
     if [ $os = "windows" ]; then
 
         b2 -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
-
-    elif [ $1 != "macOS" ]; then
-
-        b2 -j4 toolset=clang-darwin cxxflags=-std=c++11 variant=release link=shared \
-               openssl-version=pre1.1
     else
         b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
     fi
