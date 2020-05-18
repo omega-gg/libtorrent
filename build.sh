@@ -9,13 +9,11 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-MinGW_version="7.3.0"
-
 libtorrent_versionA="1.2.6"
 libtorrent_versionB="1_2_6"
 
-Boost_versionA="1.73.0"
-Boost_versionB="1_73_0"
+Boost_versionA="1.71.0"
+Boost_versionB="1_71_0"
 
 #--------------------------------------------------------------------------------------------------
 # Windows
@@ -197,7 +195,6 @@ echo ""
 
 if [ $compiler = "msvc" ]; then
 
-    echo ""
     echo "EXTRACTING MinGW"
 
     test -d "$MinGW" && rm -rf "$MinGW"
@@ -252,6 +249,8 @@ tar -xf libtorrent.tar.gz
 rm libtorrent.tar.gz
 
 mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
+
+echo ""
 
 #--------------------------------------------------------------------------------------------------
 # Build
