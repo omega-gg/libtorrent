@@ -209,17 +209,13 @@ else
     if [ $os = "windows" ]; then
 
         b2 -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
-
-    elif [ $1 = "linux" ]; then
-
-        # NOTE Linux: It seems b2 returns an error code.
+    else
+        # NOTE: Sometimes, it seems b2 returns an error code.
         set +e
 
         b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 
         set -e
-    else
-        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
     fi
 
     cd ..
