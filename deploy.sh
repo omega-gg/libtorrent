@@ -5,13 +5,18 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
-MinGW_versionA="7.3.0"
-MinGW_versionB="73"
-
 libtorrent_version="1.2.6"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71"
+
+#--------------------------------------------------------------------------------------------------
+# Windows
+
+MinGW_versionA="7.3.0"
+MinGW_versionB="73"
+
+MSVC_version="14.2"
 
 #--------------------------------------------------------------------------------------------------
 # macOS
@@ -29,13 +34,12 @@ gcc_version="7"
 
 if [ $# != 1 ] \
    || \
-   [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" -a $1 != "linux" -a $1 != "androidv7" -a \
-                                                                         $1 != "androidv8" -a \
-                                                                         $1 != "android32" -a \
-                                                                         $1 != "android64" ]; then
+   [ $1 != "win32" -a $1 != "win64" -a $1 != "win32-msvc" -a $1 != "win64-msvc" -a \
+     $1 != "macOS" -a $1 != "linux" -a $1 != "androidv7"  -a $1 != "androidv8"  -a \
+     $1 != "android32" -a $1 != "android64" ]; then
 
-    echo \
-    "Usage: deploy <win32 | win64 | macOS | linux | androidv7 | androidv8 | android32 | android64>"
+    echo "Usage: deploy <win32 | win64 | win32-msvc | win64-msvc | macOS | linux |"
+    echo "               androidv7 | androidv8 | android32 | android64>"
 
     exit 1
 fi
@@ -44,13 +48,29 @@ fi
 # Configuration
 #--------------------------------------------------------------------------------------------------
 
-if [ $1 = "win32" -o $1 = "win64" ]; then
+if [ $1 = "win32" -o $1 = "win64" -o $1 = "win32-msvc" -o $1 = "win64-msvc" ]; then
 
     os="windows"
+
+    if [ $1 = "win32" -o $1 = "win64" ]; then
+
+        compiler="mingw"
+    else
+        compiler="msvc"
+    fi
+
+    if [ $1 = "win32" -o $1 = "win32-msvc" ]; then
+
+        target="32"
+    else
+        target="64"
+    fi
 
 elif [ $1 = "androidv7" -o $1 = "androidv8" -o $1 = "android32" -o $1 = "android64" ]; then
 
     os="android"
+
+    compiler="default"
 
     if [ $1 = "androidv7" ]; then
 
@@ -70,6 +90,8 @@ elif [ $1 = "androidv7" -o $1 = "androidv8" -o $1 = "android32" -o $1 = "android
     fi
 else
     os="default"
+
+    compiler="default"
 fi
 
 #--------------------------------------------------------------------------------------------------
@@ -84,20 +106,20 @@ mkdir -p $path
 
 cp -r boost/boost $path/Boost
 
-if [ $1 = "win32" ]; then
+if [ $compiler = "mingw" ]; then
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x32-$Boost_versionB.dll.a \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll.a \
     "$path"/libboost_system.a
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x32-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll \
     "$path"/libboost_system.dll
 
-elif [ $1 = "win64" ]; then
+elif [ $compiler = "msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x64-$Boost_versionB.dll.a \
-    "$path"/libboost_system.a
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/address-model-$target/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.lib \
+    "$path"/libboost_system.lib
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x64-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/address-model-$target/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.dll \
     "$path"/libboost_system.dll
 
 elif [ $1 = "macOS" ]; then
@@ -124,12 +146,17 @@ mkdir -p $path
 
 cp -r libtorrent/include/libtorrent $path
 
-if [ $os = "windows" ]; then
+if [ $compiler = "mingw" ]; then
 
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a \
     "$path"/libtorrent.a
 
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll "$path"
+
+elif [ $compiler = "msvc" ]; then
+
+    cp libtorrent/bin/msvc-$MSVC_version/release/address-model-$target/threading-multi/torrent.lib "$path"
+    cp libtorrent/bin/msvc-$MSVC_version/release/address-model-$target/threading-multi/torrent.dll "$path"
 
 elif [ $1 = "macOS" ]; then
 
