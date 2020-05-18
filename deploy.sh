@@ -16,7 +16,8 @@ Boost_versionB="1_71"
 MinGW_versionA="7.3.0"
 MinGW_versionB="73"
 
-MSVC_version="14.2"
+MSVC_versionA="14.2"
+MSVC_versionB="142"
 
 #--------------------------------------------------------------------------------------------------
 # macOS
@@ -116,18 +117,18 @@ if [ $compiler = "mingw" ]; then
 
 elif [ $1 = "win32-msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.lib \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
     "$path"/boost_system.lib
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
     "$path"/boost_system.dll
 
 elif [ $1 = "win64-msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/address-model-$target/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.lib \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
     "$path"/boost_system.lib
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/address-model-$target/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
     "$path"/boost_system.dll
 
 elif [ $1 = "macOS" ]; then
@@ -163,8 +164,8 @@ if [ $compiler = "mingw" ]; then
 
 elif [ $compiler = "msvc" ]; then
 
-    cp libtorrent/bin/msvc-$MSVC_version/release/address-model-$target/threading-multi/torrent.lib "$path"
-    cp libtorrent/bin/msvc-$MSVC_version/release/address-model-$target/threading-multi/torrent.dll "$path"
+    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/torrent.lib "$path"
+    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/torrent.dll "$path"
 
 elif [ $1 = "macOS" ]; then
 
