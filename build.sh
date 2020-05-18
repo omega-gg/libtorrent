@@ -15,9 +15,9 @@ MinGW_versionB="73"
 libtorrent_versionA="1.2.6"
 libtorrent_versionB="1_2_6"
 
-Boost_versionA="1.71.0"
-Boost_versionB="1_71_0"
-Boost_versionC="1_71"
+Boost_versionA="1.73.0"
+Boost_versionB="1_73_0"
+Boost_versionC="1_73"
 
 #--------------------------------------------------------------------------------------------------
 # macOS
@@ -220,6 +220,11 @@ else
     if [ $os = "windows" ]; then
 
         b2 -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+
+    elif [ $1 != "macOS" ]; then
+
+        b2 -j4 toolset=clang-darwin cxxflags=-std=c++11 variant=release link=shared \
+               openssl-version=pre1.1
     else
         b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
     fi
