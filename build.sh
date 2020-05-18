@@ -307,7 +307,7 @@ else
 
         set -e
     else
-        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1 warnings-as-errors=off
     fi
 
     cd ..
