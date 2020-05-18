@@ -11,8 +11,8 @@ external="$PWD/../3rdparty"
 
 MinGW_version="7.3.0"
 
-libtorrent_versionA="1.2.6"
-libtorrent_versionB="1_2_6"
+libtorrent_versionA="1.2.2"
+libtorrent_versionB="1_2_2"
 
 Boost_versionA="1.73.0"
 Boost_versionB="1_73_0"
