@@ -9,15 +9,13 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-MinGW_versionA="7.3.0"
-MinGW_versionB="73"
+MinGW_version="7.3.0"
 
 libtorrent_versionA="1.2.6"
 libtorrent_versionB="1_2_6"
 
 Boost_versionA="1.73.0"
 Boost_versionB="1_73_0"
-Boost_versionC="1_73"
 
 #--------------------------------------------------------------------------------------------------
 # macOS
@@ -94,7 +92,7 @@ else
     os="default"
 fi
 
-MinGW="$external/MinGW/$MinGW_versionA"
+MinGW="$external/MinGW/$MinGW_version"
 
 NDK="$external/NDK/$NDK_version"
 
@@ -211,6 +209,15 @@ else
     if [ $os = "windows" ]; then
 
         b2 -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+
+    elif [ $1 = "linux" ]; then
+
+        # NOTE Linux: It seems b2 returns an error code.
+        set +e
+
+        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+
+        set -e
     else
         b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
     fi
