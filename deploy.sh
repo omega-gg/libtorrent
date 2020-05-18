@@ -117,10 +117,10 @@ if [ $compiler = "mingw" ]; then
 elif [ $compiler = "msvc" ]; then
 
     cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/address-model-$target/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.lib \
-    "$path"/libboost_system.lib
+    "$path"/boost_system.lib
 
     cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/address-model-$target/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.dll \
-    "$path"/libboost_system.dll
+    "$path"/boost_system.dll
 
 elif [ $1 = "macOS" ]; then
 
