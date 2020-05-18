@@ -114,7 +114,15 @@ if [ $compiler = "mingw" ]; then
     cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll \
     "$path"/libboost_system.dll
 
-elif [ $compiler = "msvc" ]; then
+elif [ $1 = "win32-msvc" ]; then
+
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.lib \
+    "$path"/boost_system.lib
+
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.dll \
+    "$path"/boost_system.dll
+
+elif [ $1 = "win64-msvc" ]; then
 
     cp boost/bin.v2/libs/system/build/msvc-$MSVC_version/release/address-model-$target/threading-multi/boost_system-vc142-mt-x$target-$Boost_versionB.lib \
     "$path"/boost_system.lib
