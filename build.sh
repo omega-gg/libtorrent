@@ -148,6 +148,15 @@ touch  deploy/.gitignore
 # Install
 #--------------------------------------------------------------------------------------------------
 
+if [ $compiler = "msvc" ]; then
+
+    if [ ! -d "/c/Program Files/7-Zip" ]; then
+
+        echo "Warning: You need 7zip installed in C:/Program Files/7-Zip"
+    else
+        PATH="/c/Program Files/7-Zip:$PATH"
+    fi
+
 if [ $1 = "linux" ] || [ $1 = "android" ]; then
 
     sudo apt-get -y install build-essential curl unzip
@@ -159,7 +168,7 @@ fi
 # Download
 #--------------------------------------------------------------------------------------------------
 
-echo "DOWNLOADING boost"
+echo "DOWNLOADING Boost"
 echo $boost
 
 curl -L -o boost.zip $boost
@@ -169,35 +178,6 @@ echo "DOWNLOADING libtorrent"
 echo $libtorrent
 
 curl -L -o libtorrent.tar.gz $libtorrent
-
-#--------------------------------------------------------------------------------------------------
-# Boost
-#--------------------------------------------------------------------------------------------------
-
-test -d boost && rm -rf boost
-
-unzip -q boost.zip
-
-rm boost.zip
-
-mv boost_$Boost_versionB boost
-
-if [ $1 = "android" ]; then
-
-    cp android/user-config.jam boost/tools/build/src
-fi
-
-#--------------------------------------------------------------------------------------------------
-# libtorrent
-#--------------------------------------------------------------------------------------------------
-
-test -d libtorrent && rm -rf libtorrent
-
-tar -xf libtorrent.tar.gz
-
-rm libtorrent.tar.gz
-
-mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 
 #--------------------------------------------------------------------------------------------------
 # MinGW
@@ -228,6 +208,41 @@ if [ $compiler = "msvc" ]; then
 
     rm -rf "$MinGW/Tools"
 fi
+
+#--------------------------------------------------------------------------------------------------
+# Boost
+#--------------------------------------------------------------------------------------------------
+
+echo ""
+echo "EXTRACTING Boost"
+
+test -d boost && rm -rf boost
+
+unzip -q boost.zip
+
+rm boost.zip
+
+mv boost_$Boost_versionB boost
+
+if [ $1 = "android" ]; then
+
+    cp android/user-config.jam boost/tools/build/src
+fi
+
+#--------------------------------------------------------------------------------------------------
+# libtorrent
+#--------------------------------------------------------------------------------------------------
+
+echo ""
+echo "EXTRACTING libtorrent"
+
+test -d libtorrent && rm -rf libtorrent
+
+tar -xf libtorrent.tar.gz
+
+rm libtorrent.tar.gz
+
+mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 
 #--------------------------------------------------------------------------------------------------
 # Build
