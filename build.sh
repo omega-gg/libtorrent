@@ -299,15 +299,17 @@ else
 
         b2 -j4 toolset=msvc address-model=$target variant=release link=shared openssl-version=pre1.1
 
-    elif [ $1 = "linux" ]; then
+    elif [ $1 = "macOS" ]; then
+
+        b2 -j4 toolset=clang-darwin cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+
+    else # linux
         # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
         set +e
 
         b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 
         set -e
-    else
-        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
     fi
 
     cd ..
