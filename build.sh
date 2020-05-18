@@ -101,7 +101,7 @@ if [ $1 = "win32" -o $1 = "win64" -o $1 = "win32-msvc" -o $1 = "win64-msvc" ]; t
     else
         compiler="msvc"
 
-        MinGW="MinGW"
+        MinGW="$PWD/MinGW"
 
         if [ $1 = "win32-msvc" ]; then
 
