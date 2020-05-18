@@ -8,7 +8,7 @@ set -e
 MinGW_versionA="7.3.0"
 MinGW_versionB="73"
 
-libtorrent_version="1.2.6"
+libtorrent_version="1.2.2"
 
 Boost_versionA="1.73.0"
 Boost_versionB="1_73"
