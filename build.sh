@@ -231,7 +231,11 @@ rm boost.zip
 
 mv boost_$Boost_versionB boost
 
-if [ $1 = "android" ]; then
+if [ $1 = "macOS" ]; then
+
+    cp macOS/darwin.jam boost/tools/build/src/tools
+
+elif [ $1 = "android" ]; then
 
     cp android/user-config.jam boost/tools/build/src
 fi
