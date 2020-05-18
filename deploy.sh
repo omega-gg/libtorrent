@@ -22,7 +22,7 @@ MSVC_versionB="142"
 #--------------------------------------------------------------------------------------------------
 # macOS
 
-darwin_version="4.2.1"
+clang_version="11.0.3"
 
 #--------------------------------------------------------------------------------------------------
 # linux
@@ -133,7 +133,7 @@ elif [ $1 = "win64-msvc" ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp boost/bin.v2/libs/system/build/darwin-$darwin_version/release/threading-multi/visibility-hidden/libboost_system.dylib \
+    cp boost/bin.v2/libs/system/build/darwin-$clang_version/release/threading-multi/visibility-hidden/libboost_system.dylib \
     "$path"/libboost_system.dylib
 
 elif [ $1 = "linux" ]; then
@@ -169,7 +169,7 @@ elif [ $compiler = "msvc" ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp libtorrent/bin/darwin-$darwin_version/release/threading-multi/libtorrent.dylib.$libtorrent_version \
+    cp libtorrent/bin/darwin-$clang_version/release/threading-multi/libtorrent.dylib.$libtorrent_version \
     "$path"/libtorrent.dylib
 
 elif [ $1 = "linux" ]; then
