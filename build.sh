@@ -18,6 +18,12 @@ Boost_versionA="1.73.0"
 Boost_versionB="1_73_0"
 
 #--------------------------------------------------------------------------------------------------
+# Windows
+
+MinGW_versionA="7.3.0"
+MinGW_versionB="730"
+
+#--------------------------------------------------------------------------------------------------
 # macOS
 
 darwin_version="4.2.1"
@@ -64,10 +70,10 @@ buildAndroid()
 
 if [ $# != 1 ] \
    || \
-   [ $1 != "win32" -a $1 != "win64" -a $1 != "macOS" -a $1 != "linux" -a $1 != "android" ]; then
+   [ $1 != "win32" -a $1 != "win64" -a $1 != "win32-msvc" -a $1 != "win64-msvc" -a \
+     $1 != "macOS" -a $1 != "linux" -a $1 != "android" ]; then
 
-    echo \
-    "Usage: build <win32 | win64 | macOS | linux | android>"
+    echo "Usage: build <win32 | win64 | win32-msvc | win64-msvc | macOS | linux | android>"
 
     exit 1
 fi
@@ -78,21 +84,44 @@ fi
 
 external="$external/$1"
 
-if [ $1 = "win32" -o $1 = "win64" ]; then
+if [ $1 = "win32" -o $1 = "win64" -o $1 = "win32-msvc" -o $1 = "win64-msvc" ]; then
 
     os="windows"
+
+    if [ $1 = "win32" -o $1 = "win64" ]; then
+
+        compiler="mingw"
+
+        MinGW="$external/MinGW/$MinGW_versionA"
+    else
+        compiler="msvc"
+
+        MinGW="MinGW"
+
+        if [ $1 = "win32-msvc" ]; then
+
+            target="32"
+
+            MinGW_url="http://ftp1.nluug.nl/languages/qt/online/qtsdkrepository/windows_x86/desktop/tools_mingw/qt.tools.win32_mingw730/7.3.0-1-201903151311i686-7.3.0-release-posix-dwarf-rt_v5-rev0.7z"
+        else
+            target="64"
+
+            MinGW_url="http://ftp1.nluug.nl/languages/qt/online/qtsdkrepository/windows_x86/desktop/tools_mingw/qt.tools.win64_mingw730/7.3.0-1x86_64-7.3.0-release-posix-seh-rt_v5-rev0.7z"
+        fi
+    fi
 
 elif [ $1 = "android" ]; then
 
     os="default"
 
-    # FIXME
-    external="$PWD/../3rdparty/android"
+    compiler="default"
 else
+    compiler="default"
+
     os="default"
 fi
 
-MinGW="$external/MinGW/$MinGW_version"
+$external="$external/$1"
 
 NDK="$external/NDK/$NDK_version"
 
@@ -168,6 +197,36 @@ rm libtorrent.tar.gz
 mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
 
 #--------------------------------------------------------------------------------------------------
+# MinGW
+#--------------------------------------------------------------------------------------------------
+
+if [ $compiler = "msvc" ]; then
+
+    echo ""
+    echo "DOWNLOADING MinGW"
+    echo $MinGW_url
+
+    curl -L -o MinGW.7z $MinGW_url
+
+    mkdir -p "$MinGW"
+
+    7z x MinGW.7z -o"$MinGW" > /dev/null
+
+    rm MinGW.7z
+
+    if [ $1 = "win32" ]; then
+
+        path="$MinGW"/Tools/mingw"$MinGW_versionB"_32
+    else
+        path="$MinGW"/Tools/mingw"$MinGW_versionB"_64
+    fi
+
+    mv "$path"/* "$MinGW"
+
+    rm -rf "$MinGW/Tools"
+fi
+
+#--------------------------------------------------------------------------------------------------
 # Build
 #--------------------------------------------------------------------------------------------------
 
@@ -206,11 +265,15 @@ else
 
     cd ../../../../../libtorrent
 
-    if [ $os = "windows" ]; then
+    if [ $compiler = "mingw" ]; then
 
         b2 -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+
+    elif [ $compiler = "msvc" ]; then
+
+        b2 -j4 address-model=$target variant=release link=shared openssl-version=pre1.1
     else
-        # NOTE: Sometimes, it seems b2 returns an error code.
+        # FIXME libtorrent 1.2.6: It seems b2 returns an error code, even when it succeeds.
         set +e
 
         b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
