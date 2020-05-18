@@ -157,7 +157,7 @@ if [ $compiler = "msvc" ]; then
         PATH="/c/Program Files/7-Zip:$PATH"
     fi
 
-if [ $1 = "linux" ] || [ $1 = "android" ]; then
+elif [ $1 = "linux" ] || [ $1 = "android" ]; then
 
     sudo apt-get -y install build-essential curl unzip
 
