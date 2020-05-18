@@ -11,8 +11,8 @@ external="$PWD/../3rdparty"
 
 MinGW_version="7.3.0"
 
-libtorrent_versionA="1.2.2"
-libtorrent_versionB="1_2_2"
+libtorrent_versionA="1.2.6"
+libtorrent_versionB="1_2_6"
 
 Boost_versionA="1.73.0"
 Boost_versionB="1_73_0"
@@ -168,6 +168,16 @@ fi
 # Download
 #--------------------------------------------------------------------------------------------------
 
+if [ $compiler = "msvc" ]; then
+
+    echo "DOWNLOADING MinGW"
+    echo $MinGW_url
+
+    curl -L -o MinGW.7z $MinGW_url
+
+    echo ""
+fi
+
 echo "DOWNLOADING Boost"
 echo $boost
 
@@ -179,6 +189,8 @@ echo $libtorrent
 
 curl -L -o libtorrent.tar.gz $libtorrent
 
+echo ""
+
 #--------------------------------------------------------------------------------------------------
 # MinGW
 #--------------------------------------------------------------------------------------------------
@@ -186,10 +198,9 @@ curl -L -o libtorrent.tar.gz $libtorrent
 if [ $compiler = "msvc" ]; then
 
     echo ""
-    echo "DOWNLOADING MinGW"
-    echo $MinGW_url
+    echo "EXTRACTING MinGW"
 
-    curl -L -o MinGW.7z $MinGW_url
+    test -d "$MinGW" && rm -rf "$MinGW"
 
     mkdir -p "$MinGW"
 
@@ -213,7 +224,6 @@ fi
 # Boost
 #--------------------------------------------------------------------------------------------------
 
-echo ""
 echo "EXTRACTING Boost"
 
 test -d boost && rm -rf boost
@@ -233,7 +243,6 @@ fi
 # libtorrent
 #--------------------------------------------------------------------------------------------------
 
-echo ""
 echo "EXTRACTING libtorrent"
 
 test -d libtorrent && rm -rf libtorrent
@@ -289,7 +298,7 @@ else
 
     elif [ $compiler = "msvc" ]; then
 
-        b2 -j4 address-model=$target variant=release link=shared openssl-version=pre1.1
+        b2 -j4 toolset=msvc address-model=$target variant=release link=shared openssl-version=pre1.1
 
     elif [ $1 = "linux" ]; then
         # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
