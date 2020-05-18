@@ -99,7 +99,7 @@ if [ $1 = "win32" -o $1 = "win64" -o $1 = "win32-msvc" -o $1 = "win64-msvc" ]; t
     else
         compiler="msvc"
 
-        MinGW="$PWD/MinGW"
+        MinGW="$PWD/MinGW/$MinGW_versionA"
 
         if [ $1 = "win32-msvc" ]; then
 
@@ -205,7 +205,7 @@ if [ $compiler = "msvc" ]; then
 
     rm MinGW.7z
 
-    if [ $1 = "win32" ]; then
+    if [ $1 = "win32-msvc" ]; then
 
         path="$MinGW"/Tools/mingw"$MinGW_versionB"_32
     else
