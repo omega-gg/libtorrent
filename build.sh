@@ -301,7 +301,7 @@ else
 
     elif [ $1 = "macOS" ]; then
 
-        b2 -j4 toolset=clang-darwin cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+        b2 -j4 toolset=clang cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 
     else # linux
         # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
