@@ -50,8 +50,13 @@ buildAndroid()
 
     cd ../../../../../libtorrent
 
+    # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
+    set +e
+
     b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
                                                                            openssl-version=pre1.1
+
+    set -e
 
     cd ..
 
@@ -272,13 +277,16 @@ else
     elif [ $compiler = "msvc" ]; then
 
         b2 -j4 address-model=$target variant=release link=shared openssl-version=pre1.1
-    else
-        # FIXME libtorrent 1.2.6: It seems b2 returns an error code, even when it succeeds.
+
+    elif [ $1 = "linux" ]; then
+        # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
         set +e
 
         b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
 
         set -e
+    else
+        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
     fi
 
     cd ..
