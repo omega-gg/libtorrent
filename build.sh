@@ -9,8 +9,8 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_versionA="1.2.6"
-libtorrent_versionB="1_2_6"
+libtorrent_versionA="1.2.2"
+libtorrent_versionB="1_2_2"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71_0"
@@ -307,7 +307,7 @@ else
 
         set -e
     else
-        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1 warnings-as-errors=off
+        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
     fi
 
     cd ..
