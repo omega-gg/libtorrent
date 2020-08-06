@@ -103,82 +103,91 @@ echo "DEPLOYING"
 
 path="deploy/Boost/$Boost_versionA"
 
-mkdir -p $path
+if [ $os = "android" ]; then
+
+    mkdir -p $path/$abi
+else
+    mkdir -p $path
+fi
 
 cp -r boost/boost $path/Boost
 
 if [ $compiler = "mingw" ]; then
 
     cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll.a \
-    "$path"/libboost_system.a
+    $path/libboost_system.a
 
     cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll \
-    "$path"/libboost_system.dll
+    $path/libboost_system.dll
 
 elif [ $1 = "win32-msvc" ]; then
 
     cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
-    "$path"/boost_system.lib
+    $path/boost_system.lib
 
     cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
-    "$path"/boost_system.dll
+    $path/boost_system.dll
 
 elif [ $1 = "win64-msvc" ]; then
 
     cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
-    "$path"/boost_system.lib
+    $path/boost_system.lib
 
     cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
-    "$path"/boost_system.dll
+    $path/boost_system.dll
 
 elif [ $1 = "macOS" ]; then
 
     cp boost/bin.v2/libs/system/build/darwin-$clang_version/release/threading-multi/visibility-hidden/libboost_system.dylib \
-    "$path"/libboost_system.dylib
+    $path/libboost_system.dylib
 
 elif [ $1 = "linux" ]; then
 
     cp boost/bin.v2/libs/system/build/gcc-$gcc_version/release/threading-multi/visibility-hidden/libboost_system.so.$Boost_versionA \
-    "$path"/libboost_system.so
+    $path/libboost_system.so
 
 elif [ $os = "android" ]; then
 
     cp boost/bin.v2/libs/system/build/clang-linux-arm/release/link-static/visibility-hidden/libboost_system.a \
-    "$path"/libboost_system_$abi.a
+    $path/$abi
 fi
 
 #--------------------------------------------------------------------------------------------------
 
 path="deploy/libtorrent/$libtorrent_version"
 
-mkdir -p $path
+if [ $os = "android" ]; then
+
+    mkdir -p $path/$abi
+else
+    mkdir -p $path
+fi
 
 cp -r libtorrent/include/libtorrent $path
 
 if [ $compiler = "mingw" ]; then
 
     cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a \
-    "$path"/libtorrent.a
+    $path/libtorrent.a
 
-    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll "$path"
+    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll $path
 
 elif [ $compiler = "msvc" ]; then
 
-    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/torrent.lib "$path"
-    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/torrent.dll "$path"
+    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/torrent.lib $path
+    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/torrent.dll $path
 
 elif [ $1 = "macOS" ]; then
 
     cp libtorrent/bin/darwin-$clang_version/release/threading-multi/libtorrent.dylib.$libtorrent_version \
-    "$path"/libtorrent.dylib
+    $path/libtorrent.dylib
 
 elif [ $1 = "linux" ]; then
 
     cp libtorrent/bin/gcc-$gcc_version/release/threading-multi/libtorrent.so.$libtorrent_version \
-    "$path"/libtorrent.so
+    $path/libtorrent.so
 
 elif [ $os = "android" ]; then
 
-    cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent.a \
-    "$path"/libtorrent_$abi.a
+    cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent.a $path/$abi
 fi
