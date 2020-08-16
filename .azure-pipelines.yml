@@ -110,7 +110,7 @@ jobs:
     vmImage: "ubuntu-latest"
   steps:
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
+      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:20.04 tail -f /dev/null
       docker exec -t ubuntu bash -c "cd /libtorrent/..;
                                      apt-get update;
                                      apt-get -y install sudo zip git;
@@ -131,7 +131,7 @@ jobs:
     vmImage: "ubuntu-latest"
   steps:
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
+      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:20.04 tail -f /dev/null
       docker exec -t ubuntu bash -c "cd /libtorrent/..;
                                      apt-get update;
                                      apt-get -y install sudo curl zip unzip git;
