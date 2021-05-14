@@ -5,7 +5,7 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_version="1.2.6"
+libtorrent_version="2.0.3"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71"
@@ -114,36 +114,36 @@ cp -r boost/boost $path/Boost
 
 if [ $compiler = "mingw" ]; then
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll.a \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll.a \
     $path/libboost_system.a
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll \
     $path/libboost_system.dll
 
 elif [ $1 = "win32-msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.lib \
     $path/boost_system.lib
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.dll \
     $path/boost_system.dll
 
 elif [ $1 = "win64-msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.lib \
     $path/boost_system.lib
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.dll \
     $path/boost_system.dll
 
 elif [ $1 = "macOS" ]; then
 
-    cp boost/bin.v2/libs/system/build/darwin-$clang_version/release/threading-multi/visibility-hidden/libboost_system.dylib \
+    cp boost/bin.v2/libs/system/build/darwin-$clang_version/release/visibility-hidden/libboost_system.dylib \
     $path/libboost_system.dylib
 
 elif [ $1 = "linux" ]; then
 
-    cp boost/bin.v2/libs/system/build/gcc-$gcc_version/release/threading-multi/visibility-hidden/libboost_system.so.$Boost_versionA \
+    cp boost/bin.v2/libs/system/build/gcc-$gcc_version/release/visibility-hidden/libboost_system.so.$Boost_versionA \
     $path/libboost_system.so
 
 elif [ $os = "android" ]; then
@@ -167,27 +167,31 @@ cp -r libtorrent/include/libtorrent $path
 
 if [ $compiler = "mingw" ]; then
 
-    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll.a \
+    cp libtorrent/bin/gcc-$MinGW_versionA/release/cxxstd-14-iso/threading-multi/libtorrent.dll.a \
     $path/libtorrent.a
 
-    cp libtorrent/bin/gcc-$MinGW_versionA/release/threading-multi/libtorrent.dll $path
+    cp libtorrent/bin/gcc-$MinGW_versionA/release/cxxstd-14-iso/threading-multi/libtorrent-rasterbar.dll \
+    $path
 
 elif [ $compiler = "msvc" ]; then
 
-    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/torrent.lib $path
-    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/threading-multi/torrent.dll $path
+    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/cxxstd-14-iso/threading-multi/torrent-rasterbar.lib \
+    $path
+
+    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/cxxstd-14-iso/threading-multi/torrent-rasterbar.dll \
+    $path
 
 elif [ $1 = "macOS" ]; then
 
-    cp libtorrent/bin/darwin-$clang_version/release/threading-multi/libtorrent.dylib.$libtorrent_version \
-    $path/libtorrent.dylib
+    cp libtorrent/bin/darwin-$clang_version/release/cxxstd-14-iso/threading-multi/libtorrent.dylib.$libtorrent_version \
+    $path/libtorrent-rasterbar.dylib
 
 elif [ $1 = "linux" ]; then
 
     cp libtorrent/bin/gcc-$gcc_version/release/threading-multi/libtorrent.so.$libtorrent_version \
-    $path/libtorrent.so
+    $path/libtorrent-rasterbar.so
 
 elif [ $os = "android" ]; then
 
-    cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent.a $path/$abi
+    cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent-rasterbar.a $path/$abi
 fi

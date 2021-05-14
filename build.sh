@@ -9,8 +9,7 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_versionA="1.2.6"
-libtorrent_versionB="1_2_6"
+libtorrent_version="2.0.3"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71_0"
@@ -51,8 +50,8 @@ buildAndroid()
     # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
     set +e
 
-    b2 clang-arm -j4 cxxflags="-std=c++11 -fPIC -DANDROID" variant=release link=static \
-                                                                           openssl-version=pre1.1
+    b2 clang-arm -j4 cxxflags="-fPIC -DANDROID" \
+                     cxxstd=14 variant=release link=static openssl-version=pre1.1
 
     set -e
 
@@ -128,9 +127,9 @@ NDK="$external/NDK/$NDK_version"
 
 #--------------------------------------------------------------------------------------------------
 
-boost="https://dl.bintray.com/boostorg/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
+boost="https://boostorg.jfrog.io/artifactory/main/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
 
-libtorrent="https://github.com/arvidn/libtorrent/releases/download/libtorrent-$libtorrent_versionB/libtorrent-rasterbar-$libtorrent_versionA.tar.gz"
+libtorrent="https://github.com/arvidn/libtorrent/releases/download/v$libtorrent_version/libtorrent-rasterbar-$libtorrent_version.tar.gz"
 
 #--------------------------------------------------------------------------------------------------
 # Clean
@@ -252,7 +251,7 @@ tar -xf libtorrent.tar.gz
 
 rm libtorrent.tar.gz
 
-mv libtorrent-rasterbar-$libtorrent_versionA libtorrent
+mv libtorrent-rasterbar-$libtorrent_version libtorrent
 
 echo ""
 
@@ -297,21 +296,21 @@ else
 
     if [ $compiler = "mingw" ]; then
 
-        b2 -j4 toolset=gcc cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+        b2 -j4 toolset=gcc cxxstd=14 variant=release link=shared openssl-version=pre1.1
 
     elif [ $compiler = "msvc" ]; then
 
-        b2 -j4 toolset=msvc address-model=$target variant=release link=shared openssl-version=pre1.1
+        b2 -j4 toolset=msvc address-model=$target cxxstd=14 variant=release link=shared openssl-version=pre1.1
 
     elif [ $1 = "macOS" ]; then
 
-        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+        b2 -j4 cxxstd=14  variant=release link=shared openssl-version=pre1.1
 
     elif [ $1 = "linux" ]; then
         # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
         set +e
 
-        b2 -j4 cxxflags=-std=c++11 variant=release link=shared openssl-version=pre1.1
+        b2 -j4 cxxstd=14 variant=release link=shared openssl-version=pre1.1
 
         set -e
     fi
