@@ -28,6 +28,7 @@ clang_version="12.0.0"
 #--------------------------------------------------------------------------------------------------
 # linux
 
+# NOTE: Version 7 on Ubuntu 18.04 and 9 on 20.04.
 gcc_version="*"
 
 #--------------------------------------------------------------------------------------------------
@@ -131,10 +132,10 @@ elif [ $1 = "win32-msvc" ]; then
 
 elif [ $1 = "win64-msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/address-model-$target/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/cxxstd-14-iso/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
     $path/boost_system.lib
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/address-model-$target/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/cxxstd-14-iso/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
     $path/boost_system.dll
 
 elif [ $1 = "macOS" ]; then
