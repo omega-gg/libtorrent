@@ -22,12 +22,12 @@ MSVC_versionB="142"
 #--------------------------------------------------------------------------------------------------
 # macOS
 
-clang_version="11.0.3"
+clang_version="12.0.0"
 
 #--------------------------------------------------------------------------------------------------
 # linux
 
-gcc_version="7"
+gcc_version="9"
 
 #--------------------------------------------------------------------------------------------------
 # Syntax
@@ -122,10 +122,10 @@ if [ $compiler = "mingw" ]; then
 
 elif [ $1 = "win32-msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.lib \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
     $path/boost_system.lib
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
     $path/boost_system.dll
 
 elif [ $1 = "win64-msvc" ]; then
@@ -183,12 +183,12 @@ elif [ $compiler = "msvc" ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp libtorrent/bin/darwin-$clang_version/release/cxxstd-14-iso/threading-multi/libtorrent.dylib.$libtorrent_version \
+    cp libtorrent/bin/darwin-$clang_version/release/cxxstd-14-iso/threading-multi/libtorrent-rasterbar.dylib.$libtorrent_version \
     $path/libtorrent-rasterbar.dylib
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/bin/gcc-$gcc_version/release/cxxstd-14-iso/threading-multi/libtorrent.so.$libtorrent_version \
+    cp libtorrent/bin/gcc-$gcc_version/release/cxxstd-14-iso/threading-multi/libtorrent-rasterbar.so.$libtorrent_version \
     $path/libtorrent-rasterbar.so
 
 elif [ $os = "android" ]; then
