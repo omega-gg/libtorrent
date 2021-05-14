@@ -5,7 +5,8 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_version="2.0.3"
+libtorrent_versionA="2.0.3"
+libtorrent_versionB="2.0"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71"
@@ -154,7 +155,7 @@ fi
 
 #--------------------------------------------------------------------------------------------------
 
-path="deploy/libtorrent/$libtorrent_version"
+path="deploy/libtorrent/$libtorrent_versionA"
 
 if [ $os = "android" ]; then
 
@@ -175,7 +176,7 @@ if [ $compiler = "mingw" ]; then
 
 elif [ $compiler = "msvc" ]; then
 
-    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/cxxstd-14-iso/threading-multi/torrent-rasterbar.lib \
+    cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/cxxstd-14-iso/threading-multi/torrent.lib \
     $path
 
     cp libtorrent/bin/msvc-$MSVC_versionA/release/address-model-$target/cxxstd-14-iso/threading-multi/torrent-rasterbar.dll \
@@ -183,12 +184,12 @@ elif [ $compiler = "msvc" ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp libtorrent/bin/darwin-$clang_version/release/cxxstd-14-iso/threading-multi/libtorrent-rasterbar.dylib.$libtorrent_version \
+    cp libtorrent/bin/darwin-$clang_version/release/cxxstd-14-iso/threading-multi/libtorrent-rasterbar.dylib.$libtorrent_versionB \
     $path/libtorrent-rasterbar.dylib
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/bin/gcc-$gcc_version/release/cxxstd-14-iso/threading-multi/libtorrent-rasterbar.so.$libtorrent_version \
+    cp libtorrent/bin/gcc-$gcc_version/release/cxxstd-14-iso/threading-multi/libtorrent-rasterbar.so.$libtorrent_versionB \
     $path/libtorrent-rasterbar.so
 
 elif [ $os = "android" ]; then
