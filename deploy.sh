@@ -114,41 +114,41 @@ cp -r boost/boost $path/Boost
 
 if [ $compiler = "mingw" ]; then
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll.a \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll.a \
     $path/libboost_system.a
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll \
     $path/libboost_system.dll
 
 elif [ $1 = "win32-msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.lib \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.lib \
     $path/boost_system.lib
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.dll \
     $path/boost_system.dll
 
 elif [ $1 = "win64-msvc" ]; then
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.lib \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/address-model-$target/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.lib \
     $path/boost_system.lib
 
-    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/address-model-$target/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/msvc-$MSVC_versionA/release/cxxstd-14-iso/threading-multi/address-model-$target/boost_system-vc$MSVC_versionB-x$target-$Boost_versionB.dll \
     $path/boost_system.dll
 
 elif [ $1 = "macOS" ]; then
 
-    cp boost/bin.v2/libs/system/build/darwin-$clang_version/release/visibility-hidden/libboost_system.dylib \
+    cp boost/bin.v2/libs/system/build/darwin-$clang_version/release/cxxstd-14-iso/visibility-hidden/libboost_system.dylib \
     $path/libboost_system.dylib
 
 elif [ $1 = "linux" ]; then
 
-    cp boost/bin.v2/libs/system/build/gcc-$gcc_version/release/visibility-hidden/libboost_system.so.$Boost_versionA \
+    cp boost/bin.v2/libs/system/build/gcc-$gcc_version/release/cxxstd-14-iso/threading-multi/visibility-hidden/libboost_system.so.$Boost_versionA \
     $path/libboost_system.so
 
 elif [ $os = "android" ]; then
 
-    cp boost/bin.v2/libs/system/build/clang-linux-arm/release/link-static/visibility-hidden/libboost_system.a \
+    cp boost/bin.v2/libs/system/build/clang-linux-arm/release/cxxstd-14-iso/link-static/visibility-hidden/libboost_system.a \
     $path/$abi
 fi
 
@@ -188,10 +188,11 @@ elif [ $1 = "macOS" ]; then
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/bin/gcc-$gcc_version/release/threading-multi/libtorrent.so.$libtorrent_version \
+    cp libtorrent/bin/gcc-$gcc_version/release/cxxstd-14-iso/threading-multi/libtorrent.so.$libtorrent_version \
     $path/libtorrent-rasterbar.so
 
 elif [ $os = "android" ]; then
 
-    cp libtorrent/bin/clang-linux-arm/release/link-static/threading-multi/libtorrent-rasterbar.a $path/$abi
+    cp libtorrent/bin/clang-linux-arm/release/cxxstd-14-iso/link-static/threading-multi/libtorrent-rasterbar.a \
+    $path/$abi
 fi
