@@ -116,10 +116,10 @@ cp -r boost/boost $path/Boost
 
 if [ $compiler = "mingw" ]; then
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll.a \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll.a \
     $path/libboost_system.a
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll \
     $path/libboost_system.dll
 
 elif [ $1 = "win32-msvc" ]; then
@@ -140,7 +140,7 @@ elif [ $1 = "win64-msvc" ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp boost/bin.v2/libs/system/build/darwin-$clang_version/release/cxxstd-14-iso/visibility-hidden/libboost_system.dylib \
+    cp boost/bin.v2/libs/system/build/darwin-$clang_version/release/cxxstd-14-iso/threading-multi/visibility-hidden/libboost_system.dylib \
     $path/libboost_system.dylib
 
 elif [ $1 = "linux" ]; then
@@ -150,7 +150,7 @@ elif [ $1 = "linux" ]; then
 
 elif [ $os = "android" ]; then
 
-    cp boost/bin.v2/libs/system/build/clang-linux-arm/release/cxxstd-14-iso/link-static/visibility-hidden/libboost_system.a \
+    cp boost/bin.v2/libs/system/build/clang-linux-arm/release/cxxstd-14-iso/link-static/threading-multivisibility-hidden/libboost_system.a \
     $path/$abi
 fi
 
