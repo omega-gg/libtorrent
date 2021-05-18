@@ -5,8 +5,8 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_versionA="2.0.3"
-libtorrent_versionB="2.0"
+libtorrent_versionA="1.2.13"
+libtorrent_versionB="10.0.0"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71"
@@ -116,10 +116,10 @@ cp -r boost/boost $path/Boost
 
 if [ $compiler = "mingw" ]; then
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll.a \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll.a \
     $path/libboost_system.a
 
-    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-x$target-$Boost_versionB.dll \
+    cp boost/bin.v2/libs/system/build/gcc-$MinGW_versionA/release/cxxstd-14-iso/threading-multi/visibility-hidden/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll \
     $path/libboost_system.dll
 
 elif [ $1 = "win32-msvc" ]; then
@@ -150,7 +150,7 @@ elif [ $1 = "linux" ]; then
 
 elif [ $os = "android" ]; then
 
-    cp boost/bin.v2/libs/system/build/clang-linux-arm/release/cxxstd-14-iso/link-static/threading-multivisibility-hidden/libboost_system.a \
+    cp boost/bin.v2/libs/system/build/clang-linux-arm/release/cxxstd-14-iso/link-static/threading-multi/visibility-hidden/libboost_system.a \
     $path/$abi
 fi
 
