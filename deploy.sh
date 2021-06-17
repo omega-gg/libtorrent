@@ -6,7 +6,7 @@ set -e
 #--------------------------------------------------------------------------------------------------
 
 libtorrent_versionA="2.0.4"
-libtorrent_versionB="10.0.0"
+libtorrent_versionB="2.0"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71"

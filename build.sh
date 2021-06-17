@@ -291,10 +291,26 @@ else
 
     if [ $compiler = "mingw" ]; then
 
+        # FIXME libtorrent 2.0.4: For some reason we need to call this twice for the build to work.
+        set +e
+
+        b2 -j4 toolset=gcc cxxstd=14 variant=release link=shared threading=multi \
+                           install --prefix="$PWD/build"
+
+        set -e
+
         b2 -j4 toolset=gcc cxxstd=14 variant=release link=shared threading=multi \
                            install --prefix="$PWD/build"
 
     elif [ $compiler = "msvc" ]; then
+
+        # FIXME libtorrent 2.0.4: For some reason we need to call this twice for the build to work.
+        set +e
+
+        b2 -j4 toolset=msvc address-model=$target cxxstd=14 variant=release link=shared \
+                            threading=multi install --prefix="$PWD/build"
+
+        set -e
 
         b2 -j4 toolset=msvc address-model=$target cxxstd=14 variant=release link=shared \
                             threading=multi install --prefix="$PWD/build"
