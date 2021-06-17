@@ -9,7 +9,7 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_version="1.2.13"
+libtorrent_version="2.0.4"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71_0"
@@ -45,8 +45,8 @@ buildAndroid()
     # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
     set +e
 
-    b2 clang-arm -j4 cxxflags="-fPIC -DANDROID" \
-                     cxxstd=14 variant=release link=static threading=multi
+    b2 clang-arm -j4 cxxflags="-fPIC -DANDROID" cxxstd=14 variant=release link=static \
+                     threading=multi target-os=android install --prefix="$PWD/build"
 
     set -e
 
@@ -291,21 +291,23 @@ else
 
     if [ $compiler = "mingw" ]; then
 
-        b2 -j4 toolset=gcc cxxstd=14 variant=release link=shared threading=multi
+        b2 -j4 toolset=gcc cxxstd=14 variant=release link=shared threading=multi \
+                           install --prefix="$PWD/build"
 
     elif [ $compiler = "msvc" ]; then
 
-        b2 -j4 toolset=msvc address-model=$target cxxstd=14 variant=release link=shared threading=multi
+        b2 -j4 toolset=msvc address-model=$target cxxstd=14 variant=release link=shared \
+                            threading=multi install --prefix="$PWD/build"
 
     elif [ $1 = "macOS" ]; then
 
-        b2 -j4 cxxstd=14 variant=release link=shared threading=multi
+        b2 -j4 cxxstd=14 variant=release link=shared threading=multi install --prefix="$PWD/build"
 
     elif [ $1 = "linux" ]; then
         # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
         set +e
 
-        b2 -j4 cxxstd=14 variant=release link=shared threading=multi
+        b2 -j4 cxxstd=14 variant=release link=shared threading=multi install --prefix="$PWD/build"
 
         set -e
     fi
