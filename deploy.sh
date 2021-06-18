@@ -14,11 +14,9 @@ Boost_versionB="1_71"
 #--------------------------------------------------------------------------------------------------
 # Windows
 
-MinGW_versionA="7.3.0"
-MinGW_versionB="73"
+MinGW_version="73"
 
-MSVC_versionA="14.2"
-MSVC_versionB="142"
+MSVC_version="142"
 
 #--------------------------------------------------------------------------------------------------
 # macOS
@@ -116,26 +114,26 @@ cp -r boost/boost $path/Boost
 
 if [ $compiler = "mingw" ]; then
 
-    cp libtorrent/build/lib/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll.a \
+    cp libtorrent/build/lib/libboost_system-mgw$MinGW_version-mt-x$target-$Boost_versionB.dll.a \
     $path/libboost_system.a
 
-    cp libtorrent/build/lib/libboost_system-mgw$MinGW_versionB-mt-x$target-$Boost_versionB.dll \
+    cp libtorrent/build/lib/libboost_system-mgw$MinGW_version-mt-x$target-$Boost_versionB.dll \
     $path/libboost_system.dll
 
 elif [ $1 = "win32-msvc" ]; then
 
-    cp libtorrent/build/lib/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
+    cp libtorrent/build/lib/boost_system-vc$MSVC_version-mt-x$target-$Boost_versionB.lib \
     $path/boost_system.lib
 
-    cp libtorrent/build/lib/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
+    cp libtorrent/build/lib/boost_system-vc$MSVC_version-mt-x$target-$Boost_versionB.dll \
     $path/boost_system.dll
 
 elif [ $1 = "win64-msvc" ]; then
 
-    cp libtorrent/build/lib/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.lib \
+    cp libtorrent/build/lib/boost_system-vc$MSVC_version-mt-x$target-$Boost_versionB.lib \
     $path/boost_system.lib
 
-    cp libtorrent/build/lib/boost_system-vc$MSVC_versionB-mt-x$target-$Boost_versionB.dll \
+    cp libtorrent/build/lib/boost_system-vc$MSVC_version-mt-x$target-$Boost_versionB.dll \
     $path/boost_system.dll
 
 elif [ $1 = "macOS" ]; then
@@ -188,7 +186,7 @@ elif [ $1 = "linux" ]; then
 
 elif [ $os = "android" ]; then
 
-    # NOTE: That library is required when building against libtorrent-rasterbar.
+    # NOTE: This library is required when building against libtorrent-rasterbar.
     cp libtorrent/build/lib/libtry_signal.a $path/$abi
 
     cp libtorrent/build/lib/libtorrent-rasterbar.a $path/$abi
