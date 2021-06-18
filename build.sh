@@ -59,6 +59,7 @@ buildAndroid()
     rm -rf boost/bin.v2
 
     rm -rf libtorrent/bin
+    rm -rf libtorrent/deps/try_signal/bin
 
     rm -rf libtorrent/build
 }
