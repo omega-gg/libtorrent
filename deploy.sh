@@ -142,7 +142,7 @@ elif [ $1 = "macOS" ]; then
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/build/lib/libboost_system.so.$Boost_versionA $path
+    cp libtorrent/build/lib/libboost_system.so.$Boost_versionA $path/libboost_system.so
 
 elif [ $os = "android" ]; then
 
@@ -181,7 +181,8 @@ elif [ $1 = "macOS" ]; then
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/build/lib/libtorrent-rasterbar.so.$libtorrent_versionA $path
+    cp libtorrent/build/lib/libtorrent-rasterbar.so.$libtorrent_versionB \
+    $path/libtorrent-rasterbar.so
 
 elif [ $os = "android" ]; then
 
