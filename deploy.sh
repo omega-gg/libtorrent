@@ -146,7 +146,7 @@ elif [ $1 = "linux" ]; then
 
 elif [ $os = "android" ]; then
 
-    cp libtorrent/build/lib/libboost_system.a $path/$abi
+    cp libtorrent/build/lib/libboost_system.so.$Boost_versionA $path/$abi/libboost_system.so
 fi
 
 #--------------------------------------------------------------------------------------------------
@@ -186,8 +186,6 @@ elif [ $1 = "linux" ]; then
 
 elif [ $os = "android" ]; then
 
-    # NOTE: This library is required when building against libtorrent-rasterbar.
-    cp libtorrent/build/lib/libtry_signal.a $path/$abi
-
-    cp libtorrent/build/lib/libtorrent-rasterbar.a $path/$abi
+    cp libtorrent/build/lib/libtorrent-rasterbar.so.$libtorrent_versionB \
+    $path/$abi/libtorrent-rasterbar.so
 fi
