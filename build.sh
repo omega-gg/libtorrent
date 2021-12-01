@@ -9,7 +9,7 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_hash="3c20db6a1e0ed2d57401aa7fdf82c9c5a3cdc84d" # 2.0.5
+libtorrent_hash="7d317830e020230524b3ba9f84ce039919ce27b8" # 2.0.4
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71_0"
