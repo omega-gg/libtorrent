@@ -45,7 +45,7 @@ buildAndroid()
     # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
     set +e
 
-    b2 clang-arm -j4 cxxflags="-fPIC -DANDROID" cxxstd=17 variant=release link=shared \
+    b2 clang-arm -j4 cxxflags="-fPIC -DANDROID" cxxstd=17 variant=release link=static \
                      threading=multi target-os=android install --prefix="$PWD/build"
 
     set -e
