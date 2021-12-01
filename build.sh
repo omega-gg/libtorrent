@@ -9,7 +9,7 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_hash="7d317830e020230524b3ba9f84ce039919ce27b8" # 2.0.4
+libtorrent_hash="3c20db6a1e0ed2d57401aa7fdf82c9c5a3cdc84d" # 2.0.5
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71_0"
@@ -46,7 +46,8 @@ buildAndroid()
     set +e
 
     b2 clang-arm -j4 cxxflags="-fPIC -DANDROID" cxxstd=17 variant=release link=static \
-                     threading=multi target-os=android install --prefix="$PWD/build"
+                     threading=multi crypto=built-in target-os=android \
+                     install --prefix="$PWD/build"
 
     set -e
 
@@ -290,13 +291,13 @@ else
         set +e
 
         # FIXME libtorrent 2.0.4: For some reason we need to call this twice for the build to work.
-        b2 -j4 toolset=gcc cxxstd=17 variant=release link=shared threading=multi \
-                           install --prefix="$PWD/build"
+        b2 -j4 toolset=gcc cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
+               install --prefix="$PWD/build"
 
         set -e
 
-        b2 -j4 toolset=gcc cxxstd=17 variant=release link=shared threading=multi \
-                           install --prefix="$PWD/build"
+        b2 -j4 toolset=gcc cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
+               install --prefix="$PWD/build"
 
     elif [ $compiler = "msvc" ]; then
 
@@ -304,22 +305,24 @@ else
 
         # FIXME libtorrent 2.0.4: For some reason we need to call this twice for the build to work.
         b2 -j4 toolset=msvc address-model=$target cxxstd=17 variant=release link=shared \
-                            threading=multi install --prefix="$PWD/build"
+               threading=multi crypto=built-in install --prefix="$PWD/build"
 
         set -e
 
         b2 -j4 toolset=msvc address-model=$target cxxstd=17 variant=release link=shared \
-                            threading=multi install --prefix="$PWD/build"
+               threading=multi crypto=built-in install --prefix="$PWD/build"
 
     elif [ $1 = "macOS" ]; then
 
-        b2 -j4 cxxstd=17 variant=release link=shared threading=multi install --prefix="$PWD/build"
+        b2 -j4 cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
+               install --prefix="$PWD/build"
 
     elif [ $1 = "linux" ]; then
         # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
         set +e
 
-        b2 -j4 cxxstd=17 variant=release link=shared threading=multi install --prefix="$PWD/build"
+        b2 -j4 cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
+               install --prefix="$PWD/build"
 
         set -e
     fi
