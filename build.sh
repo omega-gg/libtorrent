@@ -9,7 +9,7 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_version="2.0.4"
+libtorrent_version="3c20db6a1e0ed2d57401aa7fdf82c9c5a3cdc84d"
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71_0"
@@ -127,7 +127,7 @@ NDK="$external/NDK/$NDK_version"
 
 boost="https://boostorg.jfrog.io/artifactory/main/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
 
-libtorrent="https://github.com/arvidn/libtorrent/releases/download/v$libtorrent_version/libtorrent-rasterbar-$libtorrent_version.tar.gz"
+libtorrent="https://github.com/arvidn/libtorrent/archive/$libtorrent_version.tar.gz"
 
 #--------------------------------------------------------------------------------------------------
 # Clean
@@ -249,7 +249,7 @@ tar -xf libtorrent.tar.gz
 
 rm libtorrent.tar.gz
 
-mv libtorrent-rasterbar-$libtorrent_version libtorrent
+mv libtorrent-$libtorrent_version libtorrent
 
 echo ""
 
