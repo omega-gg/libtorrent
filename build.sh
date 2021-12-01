@@ -9,7 +9,7 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_version="3c20db6a1e0ed2d57401aa7fdf82c9c5a3cdc84d" # 2.0.5
+libtorrent_hash="3c20db6a1e0ed2d57401aa7fdf82c9c5a3cdc84d" # 2.0.5
 
 Boost_versionA="1.71.0"
 Boost_versionB="1_71_0"
@@ -127,8 +127,6 @@ NDK="$external/NDK/$NDK_version"
 
 boost="https://boostorg.jfrog.io/artifactory/main/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
 
-libtorrent="https://github.com/arvidn/libtorrent/archive/$libtorrent_version.tar.gz"
-
 #--------------------------------------------------------------------------------------------------
 # Clean
 #--------------------------------------------------------------------------------------------------
@@ -177,14 +175,6 @@ echo "DOWNLOADING Boost"
 echo $boost
 
 curl -L -o boost.zip $boost
-
-echo ""
-echo "DOWNLOADING libtorrent"
-echo $libtorrent
-
-curl -L -o libtorrent.tar.gz $libtorrent
-
-echo ""
 
 #--------------------------------------------------------------------------------------------------
 # MinGW
@@ -241,15 +231,17 @@ fi
 # libtorrent
 #--------------------------------------------------------------------------------------------------
 
-echo "EXTRACTING libtorrent"
+echo "CLONING libtorrent"
 
 test -d libtorrent && rm -rf libtorrent
 
-tar -xf libtorrent.tar.gz
+git clone --recursive "https://github.com/arvidn/libtorrent"
 
-rm libtorrent.tar.gz
+cd libtorrent
 
-mv libtorrent-$libtorrent_version libtorrent
+git checkout $libtorrent_hash
+
+cd ..
 
 echo ""
 
