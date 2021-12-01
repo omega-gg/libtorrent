@@ -235,6 +235,7 @@ echo "CLONING libtorrent"
 
 test -d libtorrent && rm -rf libtorrent
 
+# NOTE: We want to clone sub modules too.
 git clone --recursive "https://github.com/arvidn/libtorrent"
 
 cd libtorrent
