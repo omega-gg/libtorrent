@@ -110,16 +110,10 @@ if [ $1 = "win32" -o $1 = "win64" -o $1 = "win32-msvc" -o $1 = "win64-msvc" ]; t
             MinGW_url="http://ftp1.nluug.nl/languages/qt/online/qtsdkrepository/windows_x86/desktop/tools_mingw/qt.tools.win64_mingw810/8.1.0-1-202004170606x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z"
         fi
     fi
-
-elif [ $1 = "android" ]; then
-
-    os="default"
-
-    compiler="default"
 else
-    compiler="default"
-
     os="default"
+
+    compiler="default"
 fi
 
 NDK="$external/NDK/$NDK_version"
