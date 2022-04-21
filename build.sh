@@ -28,6 +28,8 @@ darwin_version="4.2.1"
 #--------------------------------------------------------------------------------------------------
 # Android
 
+SDK_version="30"
+
 NDK_version="21"
 
 #--------------------------------------------------------------------------------------------------
@@ -258,19 +260,19 @@ export BOOST_ROOT=$PWD/boost
 
 if [ $1 = "android" ]; then
 
-    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang++
+    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi$SDK_version-clang++
 
     buildAndroid androidv7
 
-    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang++
+    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$SDK_version-clang++
 
     buildAndroid androidv8
 
-    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android21-clang++
+    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android$SDK_version-clang++
 
     buildAndroid android32
 
-    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android21-clang++
+    export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android$SDK_version-clang++
 
     buildAndroid android64
 else
