@@ -5,7 +5,8 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_version="2.0.6"
+libtorrent_versionA="2.0.6"
+libtorrent_versionB="2.0"
 
 Boost_version="1.71.0"
 
@@ -116,7 +117,7 @@ elif [ $1 = "macOS" ]; then
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/build/lib/libboost_system.so.* $path/libboost_system.so
+    cp libtorrent/build/lib/libboost_system.so.$Boost_version $path/libboost_system.so
 
 elif [ $os = "android" ]; then
 
@@ -125,7 +126,7 @@ fi
 
 #--------------------------------------------------------------------------------------------------
 
-path="deploy/libtorrent/$libtorrent_version"
+path="deploy/libtorrent/$libtorrent_versionA"
 
 if [ $os = "android" ]; then
 
@@ -150,11 +151,13 @@ elif [ $compiler = "msvc" ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp libtorrent/build/lib/libtorrent-rasterbar.dylib.* $path/libtorrent-rasterbar.dylib
+    cp libtorrent/build/lib/libtorrent-rasterbar.dylib.$libtorrent_versionB \
+    $path/libtorrent-rasterbar.dylib
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/build/lib/libtorrent-rasterbar.so.* $path/libtorrent-rasterbar.so
+    cp libtorrent/build/lib/libtorrent-rasterbar.so.$libtorrent_versionB \
+    $path/libtorrent-rasterbar.so
 
 elif [ $os = "android" ]; then
 
