@@ -14,7 +14,8 @@ Boost_versionB="1_71"
 #--------------------------------------------------------------------------------------------------
 # Windows
 
-MinGW_version="112"
+MinGW_versionA="81"
+MinGW_versionB="112"
 
 MSVC_version="142"
 
@@ -56,6 +57,12 @@ if [ $1 = "win32" -o $1 = "win64" -o $1 = "win32-msvc" -o $1 = "win64-msvc" ]; t
     if [ $1 = "win32" -o $1 = "win64" ]; then
 
         compiler="mingw"
+
+        if [ $1 = "win32" ]; then
+            MinGW_version="$MinGW_versionA"
+        else
+            MinGW_version="$MinGW_versionB"
+        fi
     else
         compiler="msvc"
     fi
