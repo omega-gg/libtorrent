@@ -5,30 +5,9 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_versionA="2.0.6"
-libtorrent_versionB="2.0"
+libtorrent_version="2.0.6"
 
-Boost_versionA="1.71.0"
-Boost_versionB="1_71"
-
-#--------------------------------------------------------------------------------------------------
-# Windows
-
-MinGW_versionA="81"
-MinGW_versionB="112"
-
-MSVC_version="142"
-
-#--------------------------------------------------------------------------------------------------
-# macOS
-
-clang_version="12.0.0"
-
-#--------------------------------------------------------------------------------------------------
-# linux
-
-# NOTE: Version 7 on Ubuntu 18.04 and 9 on 20.04.
-gcc_version="*"
+Boost_version="1.71.0"
 
 #--------------------------------------------------------------------------------------------------
 # Syntax
@@ -57,12 +36,6 @@ if [ $1 = "win32" -o $1 = "win64" -o $1 = "win32-msvc" -o $1 = "win64-msvc" ]; t
     if [ $1 = "win32" -o $1 = "win64" ]; then
 
         compiler="mingw"
-
-        if [ $1 = "win32" ]; then
-            MinGW_version="$MinGW_versionA"
-        else
-            MinGW_version="$MinGW_versionB"
-        fi
     else
         compiler="msvc"
     fi
@@ -108,7 +81,7 @@ fi
 
 echo "DEPLOYING"
 
-path="deploy/Boost/$Boost_versionA"
+path="deploy/Boost/$Boost_version"
 
 if [ $os = "android" ]; then
 
@@ -121,27 +94,21 @@ cp -r boost/boost $path/Boost
 
 if [ $compiler = "mingw" ]; then
 
-    cp libtorrent/build/lib/libboost_system-mgw$MinGW_version-mt-x$target-$Boost_versionB.dll.a \
-    $path/libboost_system.a
+    cp libtorrent/build/lib/libboost_system-mgw*-mt-x$target-*.dll.a $path/libboost_system.a
 
-    cp libtorrent/build/lib/libboost_system-mgw$MinGW_version-mt-x$target-$Boost_versionB.dll \
-    $path/libboost_system.dll
+    cp libtorrent/build/lib/libboost_system-mgw*-mt-x$target-*.dll $path/libboost_system.dll
 
 elif [ $1 = "win32-msvc" ]; then
 
-    cp libtorrent/build/lib/boost_system-vc$MSVC_version-mt-x$target-$Boost_versionB.lib \
-    $path/boost_system.lib
+    cp libtorrent/build/lib/boost_system-vc*-mt-x$target-*.lib $path/boost_system.lib
 
-    cp libtorrent/build/lib/boost_system-vc$MSVC_version-mt-x$target-$Boost_versionB.dll \
-    $path/boost_system.dll
+    cp libtorrent/build/lib/boost_system-vc*-mt-x$target-*.dll $path/boost_system.dll
 
 elif [ $1 = "win64-msvc" ]; then
 
-    cp libtorrent/build/lib/boost_system-vc$MSVC_version-mt-x$target-$Boost_versionB.lib \
-    $path/boost_system.lib
+    cp libtorrent/build/lib/boost_system-vc*-mt-x$target-*.lib $path/boost_system.lib
 
-    cp libtorrent/build/lib/boost_system-vc$MSVC_version-mt-x$target-$Boost_versionB.dll \
-    $path/boost_system.dll
+    cp libtorrent/build/lib/boost_system-vc*-mt-x$target-*.dll $path/boost_system.dll
 
 elif [ $1 = "macOS" ]; then
 
@@ -149,7 +116,7 @@ elif [ $1 = "macOS" ]; then
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/build/lib/libboost_system.so.$Boost_versionA $path/libboost_system.so
+    cp libtorrent/build/lib/libboost_system.so.* $path/libboost_system.so
 
 elif [ $os = "android" ]; then
 
@@ -158,7 +125,7 @@ fi
 
 #--------------------------------------------------------------------------------------------------
 
-path="deploy/libtorrent/$libtorrent_versionA"
+path="deploy/libtorrent/$libtorrent_version"
 
 if [ $os = "android" ]; then
 
@@ -183,13 +150,11 @@ elif [ $compiler = "msvc" ]; then
 
 elif [ $1 = "macOS" ]; then
 
-    cp libtorrent/build/lib/libtorrent-rasterbar.dylib.$libtorrent_versionB \
-    $path/libtorrent-rasterbar.dylib
+    cp libtorrent/build/lib/libtorrent-rasterbar.dylib.* $path/libtorrent-rasterbar.dylib
 
 elif [ $1 = "linux" ]; then
 
-    cp libtorrent/build/lib/libtorrent-rasterbar.so.$libtorrent_versionB \
-    $path/libtorrent-rasterbar.so
+    cp libtorrent/build/lib/libtorrent-rasterbar.so.* $path/libtorrent-rasterbar.so
 
 elif [ $os = "android" ]; then
 
