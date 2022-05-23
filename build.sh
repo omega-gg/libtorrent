@@ -287,16 +287,17 @@ else
 
     if [ $compiler = "mingw" ]; then
 
-        set +e
+        #set +e
 
         # FIXME libtorrent 2.0.4: For some reason we need to call this twice for the build to work.
-        b2 -j4 toolset=gcc cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
-               install --prefix="$PWD/build"
+        #b2 -j4 toolset=gcc cxxflags="-Wno-narrowing" cxxstd=17 variant=release link=shared \
+        #       threading=multi crypto=built-in install --prefix="$PWD/build"
 
-        set -e
+        #set -e
 
-        b2 -j4 toolset=gcc cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
-               install --prefix="$PWD/build"
+        # NOTE: We avoid narrowing when using MinGW 11.2.0.
+        b2 -j4 toolset=gcc cxxflags="-Wno-narrowing" cxxstd=17 variant=release link=shared \
+               threading=multi crypto=built-in install --prefix="$PWD/build"
 
     elif [ $compiler = "msvc" ]; then
 
