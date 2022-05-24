@@ -314,8 +314,8 @@ else
 
     elif [ $1 = "macOS" ]; then
 
-        b2 -j4 cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
-               install --prefix="$PWD/build"
+        b2 -j4 toolset=darwin cxxstd=17 variant=release link=shared threading=multi \
+               crypto=built-in install --prefix="$PWD/build"
 
     elif [ $1 = "linux" ]; then
         # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
