@@ -90,6 +90,7 @@ jobs:
 # Linux
 #--------------------------------------------------------------------------------------------------
 
+# NOTE: We might have an issue with linux32_qt4 images given they run on ubuntu:18.04.
 - job: linux32
   pool:
     vmImage: "ubuntu-latest"
