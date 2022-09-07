@@ -90,7 +90,24 @@ jobs:
 # Linux
 #--------------------------------------------------------------------------------------------------
 
-# NOTE: We might have an issue with linux32_qt4 images given they run on ubuntu:18.04.
+# NOTE: We need a linux32_qt4 build for ubuntu:18.04.
+- job: linux32_qt4
+  pool:
+    vmImage: "ubuntu-latest"
+  steps:
+  - bash: |
+      docker run -d --name ubuntu -v $PWD:/libtorrent i386/ubuntu:18.04 tail -f /dev/null
+      docker exec -t ubuntu bash -c "cd /libtorrent/..;
+                                     apt-get update;
+                                     apt-get -y install sudo zip git;
+                                     git clone https://github.com/omega-gg/libtorrent;
+                                     cd libtorrent;
+                                     sh build.sh linux;
+                                     cd deploy;
+                                     zip -rq ../libtorrent.zip *"
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
+    artifact: libtorrent-linux32-qt4
+
 - job: linux32
   pool:
     vmImage: "ubuntu-latest"
