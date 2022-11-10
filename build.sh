@@ -33,7 +33,7 @@ darwin_version="4.2.1"
 #               SDK 29 or 30 we get a 'cannot locate fread_unlocked' at runtime on Android 7.0.
 SDK_version="24"
 
-NDK_version="21"
+NDK_version="23"
 
 #--------------------------------------------------------------------------------------------------
 # Functions
