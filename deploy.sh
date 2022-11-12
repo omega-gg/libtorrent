@@ -5,7 +5,7 @@ set -e
 # Settings
 #--------------------------------------------------------------------------------------------------
 
-libtorrent_versionA="2.0.6"
+libtorrent_versionA="2.0.8"
 libtorrent_versionB="2.0"
 
 Boost_version="1.78.0"
