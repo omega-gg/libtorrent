@@ -283,6 +283,10 @@ else
 
     echo "$PATH"
 
+    ls -la "$MinGW/bin"
+
+    "$MinGW"/bin/gcc --version
+
     gcc --version
 
     sh build.sh gcc
