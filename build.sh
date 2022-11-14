@@ -281,14 +281,6 @@ if [ $1 = "android" ]; then
 else
     cd boost/tools/build/src/engine
 
-    echo "$PATH"
-
-    ls -la "$MinGW/bin"
-
-    "$MinGW"/bin/gcc --version
-
-    gcc --version
-
     sh build.sh gcc
 
     cd ../../../../../libtorrent
