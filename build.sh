@@ -252,14 +252,14 @@ echo ""
 
 if [ $os = "windows" ]; then
 
-    export PATH=$MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+    export PATH="$MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH"
 else
-    export PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+    export PATH="$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH"
 fi
 
-export BOOST_BUILD_PATH=$PWD/boost/tools/build/src
+export BOOST_BUILD_PATH="$PWD/boost/tools/build/src"
 
-export BOOST_ROOT=$PWD/boost
+export BOOST_ROOT="$PWD/boost"
 
 if [ $1 = "android" ]; then
 
