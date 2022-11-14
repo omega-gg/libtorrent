@@ -252,9 +252,13 @@ echo ""
 
 if [ $os = "windows" ]; then
 
-    export PATH="$MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH"
+    PATH="$MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH"
+
+    echo "$PATH"
+
+    gcc --version
 else
-    export PATH="$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH"
+    PATH="$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH"
 fi
 
 export BOOST_BUILD_PATH="$PWD/boost/tools/build/src"
