@@ -252,9 +252,9 @@ echo ""
 
 if [ $os = "windows" ]; then
 
-    PATH=$MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+    export PATH=$MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
 else
-    PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
+    export PATH=$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH
 fi
 
 export BOOST_BUILD_PATH=$PWD/boost/tools/build/src
@@ -280,6 +280,10 @@ if [ $1 = "android" ]; then
     buildAndroid android64
 else
     cd boost/tools/build/src/engine
+
+    echo "$PATH"
+
+    gcc --version
 
     sh build.sh gcc
 
