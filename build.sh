@@ -253,10 +253,6 @@ echo ""
 if [ $os = "windows" ]; then
 
     PATH="$MinGW/bin:$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH"
-
-    echo "$PATH"
-
-    gcc --version
 else
     PATH="$PWD/boost/tools/build/src/engine:$PWD/boost:$PATH"
 fi
