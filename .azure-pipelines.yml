@@ -127,18 +127,15 @@ jobs:
 
 - job: linux64
   pool:
-    vmImage: "ubuntu-latest"
+    # NOTE: We need an older version to package the application.
+    vmImage: "ubuntu-18.04"
   steps:
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:20.04 tail -f /dev/null
-      docker exec -t ubuntu bash -c "cd /libtorrent/..;
-                                     apt-get update;
-                                     apt-get -y install sudo zip git;
-                                     git clone https://github.com/omega-gg/libtorrent;
-                                     cd libtorrent;
-                                     sh build.sh linux;
-                                     cd deploy;
-                                     zip -rq ../libtorrent.zip *"
+      git clone https://github.com/omega-gg/libtorrent
+      cd libtorrent
+      sh build.sh linux
+      cd deploy
+      zip -rq ../libtorrent.zip *
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-linux64
 
@@ -151,17 +148,13 @@ jobs:
     vmImage: "ubuntu-latest"
   steps:
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:20.04 tail -f /dev/null
-      docker exec -t ubuntu bash -c "cd /libtorrent/..;
-                                     apt-get update;
-                                     apt-get -y install sudo curl zip unzip git;
-                                     git clone https://github.com/omega-gg/3rdparty;
-                                     git clone https://github.com/omega-gg/libtorrent;
-                                     cd 3rdparty;
-                                     sh generate.sh android;
-                                     cd ../libtorrent;
-                                     sh build.sh android;
-                                     cd deploy;
-                                     zip -rq ../libtorrent.zip *"
+      git clone https://github.com/omega-gg/3rdparty
+      git clone https://github.com/omega-gg/libtorrent
+      cd 3rdparty
+      sh generate.sh android
+      cd ../libtorrent
+      sh build.sh android
+      cd deploy
+      zip -rq ../libtorrent.zip *
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-android
