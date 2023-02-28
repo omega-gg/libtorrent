@@ -127,13 +127,19 @@ jobs:
 
 - job: linux64
   pool:
-    # NOTE: We need an older version to package the application.
-    vmImage: "ubuntu-18.04"
+    vmImage: "ubuntu-latest"
   steps:
+  # NOTE: We need an older version to package the application.
   - bash: |
-      sh build.sh linux
-      cd deploy
-      zip -rq ../libtorrent.zip *
+      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
+      docker exec -t ubuntu bash -c "cd /libtorrent/..;
+                                     apt-get update;
+                                     apt-get -y install sudo zip git;
+                                     git clone https://github.com/omega-gg/libtorrent;
+                                     cd libtorrent;
+                                     sh build.sh linux;
+                                     cd deploy;
+                                     zip -rq ../libtorrent.zip *"
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
     artifact: libtorrent-linux64
 
