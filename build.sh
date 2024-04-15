@@ -322,7 +322,7 @@ else
         set +e
 
         b2 -j4 cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
-               install --prefix="$PWD/build"
+               webtorrent=on install --prefix="$PWD/build"
 
         set -e
     fi
