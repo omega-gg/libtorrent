@@ -11,8 +11,8 @@ external="$PWD/../3rdparty"
 
 libtorrent_hash="74bc93a37a5e31c78f0aa02037a68fb9ac5deb41" # 2.0.10
 
-Boost_versionA="1.78.0"
-Boost_versionB="1_78_0"
+Boost_versionA="1.86.0"
+Boost_versionB="1_86_0"
 
 #--------------------------------------------------------------------------------------------------
 # Windows
