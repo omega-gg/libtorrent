@@ -17,8 +17,8 @@ Boost_versionB="1_86_0"
 #--------------------------------------------------------------------------------------------------
 # Windows
 
-MinGW_versionA="11.2.0"
-MinGW_versionB="1120"
+MinGW_versionA="13.1.0"
+MinGW_versionB="1310"
 MinGW_versionC="810"
 
 #--------------------------------------------------------------------------------------------------
@@ -112,7 +112,7 @@ if [ $1 = "win32" -o $1 = "win64" -o $1 = "win32-msvc" -o $1 = "win64-msvc" ]; t
         else
             target="64"
 
-            MinGW_url="http://ftp1.nluug.nl/languages/qt/online/qtsdkrepository/windows_x86/desktop/tools_mingw90/qt.tools.win64_mingw900/9.0.0-1-202203221220mingw-w64-x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z"
+            MinGW_url="https://master.qt.io/online/qtsdkrepository/windows_x86/desktop/tools_mingw1310/qt.tools.win64_mingw1310/13.1.0-202407240918mingw1310.7z"
         fi
     fi
 else
