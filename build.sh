@@ -125,7 +125,7 @@ NDK="$external/NDK/$NDK_version"
 
 #--------------------------------------------------------------------------------------------------
 
-boost="https://archives.boost.io/release/$Boost_versionA/source/boost_$Boost_versionB.zip
+boost="https://archives.boost.io/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
 
 #--------------------------------------------------------------------------------------------------
 # Clean
