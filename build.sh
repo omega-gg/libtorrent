@@ -323,7 +323,7 @@ else
         # FIXME libtorrent 1.2.6 Linux: It seems b2 returns an error code, even when it succeeds.
         set +e
 
-        b2 -j4 cxxstd=17 variant=release link=shared threading=multi crypto=built-in \
+        b2 -j4 cxxstd=17 variant=release link=shared threading=multi crypto=openssl \
                webtorrent=on install --prefix="$PWD/build"
 
         set -e
