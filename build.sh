@@ -242,6 +242,8 @@ cd libtorrent
 
 git checkout $libtorrent_hash
 
+git submodule update --init --recursive
+
 cd ..
 
 echo ""
