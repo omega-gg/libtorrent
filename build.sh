@@ -132,7 +132,14 @@ NDK="$external/NDK"
 
 #--------------------------------------------------------------------------------------------------
 
-boost="https://archives.boost.io/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
+Boost_url="https://archives.boost.io/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
+
+if [ $1 = "android" ]; then
+
+    JDK_url="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-${JDK_version}_linux-x64_bin.tar.gz"
+
+    SDK_url="https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip"
+fi
 
 #--------------------------------------------------------------------------------------------------
 # Clean
@@ -179,9 +186,9 @@ if [ $compiler = "msvc" ]; then
 fi
 
 echo "DOWNLOADING Boost"
-echo $boost
+echo $Boost_url
 
-curl -L -o boost.zip $boost
+curl -L -o boost.zip $Boost_url
 
 #--------------------------------------------------------------------------------------------------
 # MinGW
