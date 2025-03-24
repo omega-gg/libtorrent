@@ -29,11 +29,15 @@ darwin_version="4.2.1"
 #--------------------------------------------------------------------------------------------------
 # Android
 
+JDK_version="11.0.2"
+
 # NOTE android: SDK 24 seems to be the best bet for the maximum compatibilty. If we build against
 #               SDK 29 or 30 we get a 'cannot locate fread_unlocked' at runtime on Android 7.0.
-SDK_version="34"
+SDK_version="24"
 
-NDK_version="26"
+# NOTE android: Enforce NDK 21 to maimize libc++_shared.so compatibility.
+NDK_versionA="21"
+NDK_versionB="21.4.7075529"
 
 #--------------------------------------------------------------------------------------------------
 # Functions
@@ -121,7 +125,10 @@ else
     compiler="default"
 fi
 
-NDK="$external/NDK/$NDK_version"
+JDK="$external/JDK/$JDK_version"
+
+SDK="$external/SDK/$SDK_version"
+NDK="$external/NDK"
 
 #--------------------------------------------------------------------------------------------------
 
@@ -247,6 +254,84 @@ git submodule update --init --recursive
 cd ..
 
 echo ""
+
+#--------------------------------------------------------------------------------------------------
+# JDK
+#--------------------------------------------------------------------------------------------------
+
+if [ $1 = "android" ]; then
+
+    echo ""
+    echo "DOWNLOADING JDK"
+    echo $JDK_url
+
+    curl -L -o JDK.tar.gz $JDK_url
+
+    mkdir -p "$JDK"
+
+    tar -xf JDK.tar.gz -C "$JDK"
+
+    rm JDK.tar.gz
+
+    path="$JDK/jdk-$JDK_version"
+
+    mv "$path"/* "$JDK"
+
+    rm -rf "$path"
+fi
+
+#--------------------------------------------------------------------------------------------------
+# SDK
+#--------------------------------------------------------------------------------------------------
+
+if [ $1 = "android" ]; then
+
+    echo ""
+    echo "DOWNLOADING SDK"
+    echo $SDK_url
+
+    curl -L -o SDK.zip $SDK_url
+
+    mkdir -p "$SDK"
+
+    unzip -q SDK.zip -d "$SDK"
+
+    rm SDK.zip
+fi
+
+#--------------------------------------------------------------------------------------------------
+# NDK
+#--------------------------------------------------------------------------------------------------
+
+if [ $1 = "android" ]; then
+
+    echo ""
+    echo "DOWNLOADING NDK from SDK"
+
+    cd "$SDK/tools/bin"
+
+    export JAVA_HOME="$JDK"
+
+    path="$PWD/../.."
+
+    yes | ./sdkmanager --sdk_root="$path" --licenses
+
+    ./sdkmanager --sdk_root="$path" "ndk;$NDK_versionB"
+
+    ./sdkmanager --sdk_root="$path" --update
+
+    cd -
+
+    mkdir -p "$NDK"
+
+    cd "$NDK"
+
+    ln -s "../SDK/$SDK_version/ndk/$NDK_versionB" "$NDK_versionA"
+
+    cd -
+
+    NDK="$external/NDK/$NDK_versionA"
+fi
 
 #--------------------------------------------------------------------------------------------------
 # Build
