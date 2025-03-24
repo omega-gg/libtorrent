@@ -33,11 +33,10 @@ JDK_version="11.0.2"
 
 # NOTE android: SDK 24 seems to be the best bet for the maximum compatibilty. If we build against
 #               SDK 29 or 30 we get a 'cannot locate fread_unlocked' at runtime on Android 7.0.
-SDK_version="24"
+SDK_version="34"
 
-# NOTE android: Enforce NDK 21 to maimize libc++_shared.so compatibility.
-NDK_versionA="21"
-NDK_versionB="21.4.7075529"
+NDK_versionA="25"
+NDK_versionB="25.1.8937393"
 
 #--------------------------------------------------------------------------------------------------
 # Functions
@@ -336,8 +335,6 @@ if [ $1 = "android" ]; then
     ln -s "../SDK/$SDK_version/ndk/$NDK_versionB" "$NDK_versionA"
 
     cd -
-
-    NDK="$external/NDK/$NDK_versionA"
 fi
 
 #--------------------------------------------------------------------------------------------------
@@ -356,6 +353,8 @@ export BOOST_BUILD_PATH="$PWD/boost/tools/build/src"
 export BOOST_ROOT="$PWD/boost"
 
 if [ $1 = "android" ]; then
+
+    NDK="$external/NDK/$NDK_versionA"
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi$SDK_version-clang++
 
