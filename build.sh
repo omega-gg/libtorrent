@@ -33,7 +33,7 @@ JDK_version="11.0.2"
 
 # NOTE android: SDK 24 seems to be the best bet for the maximum compatibilty. If we build against
 #               SDK 29 or 30 we get a 'cannot locate fread_unlocked' at runtime on Android 7.0.
-SDK_version="24"
+SDK_version="21"
 
 NDK_versionA="25"
 NDK_versionB="25.2.9519653"
