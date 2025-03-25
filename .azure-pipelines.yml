@@ -147,13 +147,36 @@ jobs:
 # Android
 #--------------------------------------------------------------------------------------------------
 
-- job: android
+- job: android_qt5
   pool:
     vmImage: "ubuntu-latest"
   steps:
   - bash: |
+  cd ..
+      git clone https://github.com/omega-gg/3rdparty
+      cd 3rdparty
+      sh generate.sh android
+      cd ../s
       sh build.sh android
       cd deploy
       zip -rq ../libtorrent.zip *
   - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
-    artifact: libtorrent-android
+    artifact: libtorrent-android-qt5
+
+
+- job: android_qt6
+  pool:
+    vmImage: "ubuntu-latest"
+  steps:
+  - bash: |
+  cd ..
+      git clone https://github.com/omega-gg/3rdparty
+      cd 3rdparty
+      sh environment.sh qt6
+      sh generate.sh android
+      cd ../s
+      sh build.sh android
+      cd deploy
+      zip -rq ../libtorrent.zip *
+  - publish: $(System.DefaultWorkingDirectory)/libtorrent.zip
+    artifact: libtorrent-android-qt6

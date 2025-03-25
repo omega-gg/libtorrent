@@ -29,15 +29,10 @@ darwin_version="4.2.1"
 #--------------------------------------------------------------------------------------------------
 # Android
 
-JDK_version="11.0.2"
-
 # NOTE android: SDK 24 seems to be the best bet for the maximum compatibilty. If we build against
 #               SDK 29 or 30 we get a 'cannot locate fread_unlocked' at runtime on Android 7.0.
 #               When using SDK 21 it seems to fail loading magnets.
 SDK_version="24"
-
-NDK_versionA="25"
-NDK_versionB="25.2.9519653"
 
 #--------------------------------------------------------------------------------------------------
 # Functions
@@ -125,21 +120,9 @@ else
     compiler="default"
 fi
 
-JDK="$external/JDK/$JDK_version"
-
-SDK="$external/SDK/$SDK_version"
-NDK="$external/NDK"
-
 #--------------------------------------------------------------------------------------------------
 
 Boost_url="https://archives.boost.io/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
-
-if [ $1 = "android" ]; then
-
-    JDK_url="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-${JDK_version}_linux-x64_bin.tar.gz"
-
-    SDK_url="https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip"
-fi
 
 #--------------------------------------------------------------------------------------------------
 # Clean
@@ -263,82 +246,6 @@ cd ..
 echo ""
 
 #--------------------------------------------------------------------------------------------------
-# JDK
-#--------------------------------------------------------------------------------------------------
-
-if [ $1 = "android" ]; then
-
-    echo ""
-    echo "DOWNLOADING JDK"
-    echo $JDK_url
-
-    curl -L -o JDK.tar.gz $JDK_url
-
-    mkdir -p "$JDK"
-
-    tar -xf JDK.tar.gz -C "$JDK"
-
-    rm JDK.tar.gz
-
-    path="$JDK/jdk-$JDK_version"
-
-    mv "$path"/* "$JDK"
-
-    rm -rf "$path"
-fi
-
-#--------------------------------------------------------------------------------------------------
-# SDK
-#--------------------------------------------------------------------------------------------------
-
-if [ $1 = "android" ]; then
-
-    echo ""
-    echo "DOWNLOADING SDK"
-    echo $SDK_url
-
-    curl -L -o SDK.zip $SDK_url
-
-    mkdir -p "$SDK"
-
-    unzip -q SDK.zip -d "$SDK"
-
-    rm SDK.zip
-fi
-
-#--------------------------------------------------------------------------------------------------
-# NDK
-#--------------------------------------------------------------------------------------------------
-
-if [ $1 = "android" ]; then
-
-    echo ""
-    echo "DOWNLOADING NDK from SDK"
-
-    cd "$SDK/tools/bin"
-
-    export JAVA_HOME="$JDK"
-
-    path="$PWD/../.."
-
-    yes | ./sdkmanager --sdk_root="$path" --licenses
-
-    ./sdkmanager --sdk_root="$path" "ndk;$NDK_versionB"
-
-    ./sdkmanager --sdk_root="$path" --update
-
-    cd -
-
-    mkdir -p "$NDK"
-
-    cd "$NDK"
-
-    ln -s "../SDK/$SDK_version/ndk/$NDK_versionB" "$NDK_versionA"
-
-    cd -
-fi
-
-#--------------------------------------------------------------------------------------------------
 # Build
 #--------------------------------------------------------------------------------------------------
 
@@ -355,7 +262,7 @@ export BOOST_ROOT="$PWD/boost"
 
 if [ $1 = "android" ]; then
 
-    NDK="$external/NDK/$NDK_versionA"
+    NDK="$external/NDK/default"
 
     export COMPILER="$NDK"/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi$SDK_version-clang++
 
