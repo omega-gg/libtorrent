@@ -152,7 +152,7 @@ jobs:
     vmImage: "ubuntu-latest"
   steps:
   - bash: |
-  cd ..
+      cd ..
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
       sh generate.sh android
@@ -169,7 +169,7 @@ jobs:
     vmImage: "ubuntu-latest"
   steps:
   - bash: |
-  cd ..
+      cd ..
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
       sh environment.sh qt6
