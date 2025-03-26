@@ -1,5 +1,6 @@
 OTHER_FILES += build.sh \
                deploy.sh \
+               environment.sh \
                README.md \
                .azure-pipelines.yml \
                macOS/darwin.jam \

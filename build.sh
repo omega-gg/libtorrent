@@ -9,6 +9,9 @@ external="$PWD/../3rdparty"
 
 #--------------------------------------------------------------------------------------------------
 
+Qt5_ndk="25.2.9519653"
+Qt6_ndk="26.1.10909125"
+
 libtorrent_hash="9d7443f467147d1784fb7516d2a882db1abb5a8b" # 2.0.11
 
 Boost_versionA="1.86.0"
@@ -29,10 +32,17 @@ darwin_version="4.2.1"
 #--------------------------------------------------------------------------------------------------
 # Android
 
+JDK_version="11.0.2"
+
 # NOTE android: SDK 24 seems to be the best bet for the maximum compatibilty. If we build against
 #               SDK 29 or 30 we get a 'cannot locate fread_unlocked' at runtime on Android 7.0.
 #               When using SDK 21 it seems to fail loading magnets.
 SDK_version="24"
+
+#--------------------------------------------------------------------------------------------------
+# environment
+
+qt="qt5"
 
 #--------------------------------------------------------------------------------------------------
 # Functions
@@ -120,9 +130,23 @@ else
     compiler="default"
 fi
 
+if [ $qt = "qt5" ]; then
+
+    Qt_ndk="$Qt5_ndk"
+else
+    Qt_ndk="$Qt6_ndk"
+fi
+
 #--------------------------------------------------------------------------------------------------
 
 Boost_url="https://archives.boost.io/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
+
+if [ $1 = "android" ]; then
+
+    JDK_url="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-${JDK_version}_linux-x64_bin.tar.gz"
+
+    SDK_url="https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip"
+fi
 
 #--------------------------------------------------------------------------------------------------
 # Clean
@@ -244,6 +268,82 @@ git submodule update --init --recursive
 cd ..
 
 echo ""
+
+#--------------------------------------------------------------------------------------------------
+# JDK
+#--------------------------------------------------------------------------------------------------
+
+if [ $1 = "android" ]; then
+
+    echo ""
+    echo "DOWNLOADING JDK"
+    echo $JDK_url
+
+    curl -L -o JDK.tar.gz $JDK_url
+
+    mkdir -p "$JDK"
+
+    tar -xf JDK.tar.gz -C "$JDK"
+
+    rm JDK.tar.gz
+
+    path="$JDK/jdk-$JDK_version"
+
+    mv "$path"/* "$JDK"
+
+    rm -rf "$path"
+fi
+
+#--------------------------------------------------------------------------------------------------
+# SDK
+#--------------------------------------------------------------------------------------------------
+
+if [ $1 = "android" ]; then
+
+    echo ""
+    echo "DOWNLOADING SDK"
+    echo $SDK_url
+
+    curl -L -o SDK.zip $SDK_url
+
+    mkdir -p "$SDK"
+
+    unzip -q SDK.zip -d "$SDK"
+
+    rm SDK.zip
+fi
+
+#--------------------------------------------------------------------------------------------------
+# NDK
+#--------------------------------------------------------------------------------------------------
+
+if [ $1 = "android" ]; then
+
+    echo ""
+    echo "DOWNLOADING NDK from SDK"
+
+    cd "$SDK/tools/bin"
+
+    export JAVA_HOME="$JDK"
+
+    path="$PWD/../.."
+
+    yes | ./sdkmanager --sdk_root="$path" --licenses
+
+    ./sdkmanager --sdk_root="$path" "ndk;$Qt_ndk"
+
+    ./sdkmanager --sdk_root="$path" --update
+
+    cd -
+
+    mkdir -p "$NDK"
+
+    cd "$NDK"
+
+    ln -s "../SDK/$SDK_version/ndk/$Qt_ndk" "default"
+
+    cd -
+fi
 
 #--------------------------------------------------------------------------------------------------
 # Build
