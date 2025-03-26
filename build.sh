@@ -137,6 +137,11 @@ else
     Qt_ndk="$Qt6_ndk"
 fi
 
+JDK="$external/JDK/$JDK_version"
+
+SDK="$external/SDK/$SDK_version"
+NDK="$external/NDK"
+
 #--------------------------------------------------------------------------------------------------
 
 Boost_url="https://archives.boost.io/release/$Boost_versionA/source/boost_$Boost_versionB.zip"
