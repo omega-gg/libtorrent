@@ -10,7 +10,7 @@ external="$PWD/../3rdparty"
 #--------------------------------------------------------------------------------------------------
 
 Qt5_ndk="25.2.9519653"
-Qt6_ndk="26.1.10909125"
+Qt6_ndk="28.2.13676358"
 
 libtorrent_hash="9d7443f467147d1784fb7516d2a882db1abb5a8b" # 2.0.11
 
@@ -32,7 +32,7 @@ darwin_version="4.2.1"
 #--------------------------------------------------------------------------------------------------
 # Android
 
-JDK_version="11.0.2"
+JDK_version="17.0.2"
 
 # NOTE android: SDK 24 seems to be the best bet for the maximum compatibilty. If we build against
 #               SDK 29 or 30 we get a 'cannot locate fread_unlocked' at runtime on Android 7.0.
