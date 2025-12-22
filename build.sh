@@ -148,7 +148,7 @@ Boost_url="https://archives.boost.io/release/$Boost_versionA/source/boost_$Boost
 
 if [ $1 = "android" ]; then
 
-    JDK_url="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-${JDK_version}_linux-x64_bin.tar.gz"
+    JDK_url="https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-${JDK_version}_linux-x64_bin.tar.gz"
 
     SDK_url="https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip"
 fi
