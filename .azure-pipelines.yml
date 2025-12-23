@@ -152,6 +152,7 @@ jobs:
     vmImage: "ubuntu-latest"
   steps:
   - bash: |
+      sh environment.sh qt5
       sh build.sh android
       cd deploy
       zip -rq ../libtorrent.zip *
