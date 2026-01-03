@@ -11,6 +11,7 @@ jobs:
       cd ..
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
+      sh environment.sh qt5
       sh generate.sh win32
       cd ../s
       sh build.sh win32
@@ -27,6 +28,7 @@ jobs:
       cd ..
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
+      sh environment.sh qt6
       sh generate.sh win64
       cd ../s
       sh build.sh win64
@@ -46,6 +48,7 @@ jobs:
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
       sh environment.sh msvc
+      sh environment.sh qt5
       sh generate.sh win32
       cd ../s
       sh build.sh win32-msvc
@@ -63,7 +66,8 @@ jobs:
       git clone https://github.com/omega-gg/3rdparty
       cd 3rdparty
       sh environment.sh msvc
-      sh generate.sh win32
+      sh environment.sh qt6
+      sh generate.sh win64
       cd ../s
       sh build.sh win64-msvc
       cd deploy
