@@ -81,7 +81,7 @@ jobs:
 
 - job: macOS
   pool:
-    vmImage: "macOS-14"
+    vmImage: "macOS-15"
   steps:
   - bash: |
       sh build.sh macOS
@@ -99,8 +99,9 @@ jobs:
   pool:
     vmImage: "ubuntu-latest"
   steps:
+  # NOTE: i386 DNS resolution fails under the default seccomp profile.
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/libtorrent i386/ubuntu:18.04 tail -f /dev/null
+      docker run -d --name ubuntu --security-opt seccomp=unconfined -v $PWD:/libtorrent i386/ubuntu:18.04 tail -f /dev/null
       docker exec -t ubuntu bash -c "cd /libtorrent/..;
                                      apt-get update;
                                      apt-get -y install sudo zip git;
@@ -116,8 +117,9 @@ jobs:
   pool:
     vmImage: "ubuntu-latest"
   steps:
+  # NOTE: i386 DNS resolution fails under the default seccomp profile.
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/libtorrent i386/ubuntu:20.04 tail -f /dev/null
+      docker run -d --name ubuntu --security-opt seccomp=unconfined -v $PWD:/libtorrent i386/ubuntu:20.04 tail -f /dev/null
       docker exec -t ubuntu bash -c "cd /libtorrent/..;
                                      apt-get update;
                                      apt-get -y install sudo zip git;
