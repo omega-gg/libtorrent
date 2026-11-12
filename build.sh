@@ -12,7 +12,7 @@ external="$PWD/../3rdparty"
 Qt5_ndk="25.2.9519653"
 Qt6_ndk="28.2.13676358"
 
-libtorrent_hash="9d7443f467147d1784fb7516d2a882db1abb5a8b" # 2.0.11
+libtorrent_hash="6da363d2994f17c0b3c0450d124cf73a31a73847" # 2.1.2
 
 Boost_versionA="1.86.0"
 Boost_versionB="1_86_0"
