@@ -93,37 +93,6 @@ fi
 
 cp -r boost/boost $path/Boost
 
-if [ $compiler = "mingw" ]; then
-
-    cp libtorrent/build/lib/libboost_system-mgw*-mt-x$target-*.dll.a $path/libboost_system.a
-
-    cp libtorrent/build/lib/libboost_system-mgw*-mt-x$target-*.dll $path/libboost_system.dll
-
-elif [ $1 = "win32-msvc" ]; then
-
-    cp libtorrent/build/lib/boost_system-vc*-mt-x$target-*.lib $path/boost_system.lib
-
-    cp libtorrent/build/lib/boost_system-vc*-mt-x$target-*.dll $path/boost_system.dll
-
-elif [ $1 = "win64-msvc" ]; then
-
-    cp libtorrent/build/lib/boost_system-vc*-mt-x$target-*.lib $path/boost_system.lib
-
-    cp libtorrent/build/lib/boost_system-vc*-mt-x$target-*.dll $path/boost_system.dll
-
-elif [ $1 = "macOS" ]; then
-
-    cp libtorrent/build/lib/libboost_system.dylib $path/libboost_system.dylib
-
-elif [ $1 = "linux" ]; then
-
-    cp libtorrent/build/lib/libboost_system.so.$Boost_version $path/libboost_system.so
-
-elif [ $os = "android" ]; then
-
-    cp libtorrent/build/lib/libboost_system.a $path/$abi
-fi
-
 #--------------------------------------------------------------------------------------------------
 
 path="deploy/libtorrent/$libtorrent_versionA"
