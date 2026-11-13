@@ -27,7 +27,7 @@ MinGW_versionC="810"
 #--------------------------------------------------------------------------------------------------
 # macOS
 
-darwin_version="4.2.1"
+macOS_version="12.0"
 
 #--------------------------------------------------------------------------------------------------
 # Android
@@ -446,8 +446,10 @@ else
 
     elif [ $1 = "macOS" ]; then
 
+        flags="-arch x86_64 -arch arm64 -mmacosx-version-min=$macOS_version"
+
         b2 -j4 toolset=darwin cxxstd=17 variant=release link=shared threading=multi \
-               cflags="-arch x86_64 -arch arm64" linkflags="-arch x86_64 -arch arm64" \
+               cflags="$flags" linkflags="$flags" \
                crypto=built-in webtorrent=off install --prefix="$PWD/build"
 
     elif [ $1 = "linux" ]; then
