@@ -184,9 +184,21 @@ elif [ $1 = "linux" ] || [ $1 = "android" ]; then
     # NOTE libtorrent 2.1: We need gcc 10 for C++17, ubuntu:18.04 ships gcc 7 and 20.04 gcc 9.
     if [ "$(gcc -dumpversion | cut -d. -f1)" -lt 10 ]; then
 
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-common
+        # NOTE: ubuntu:18.04 (qt4) has no gcc 10 package so we add the toolchain PPA manually,
+        #       software-properties-common is not installable on i386.
+        if ! apt-cache show g++-10 > /dev/null 2>&1; then
 
-        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+            sudo curl -fsSL -o /etc/apt/trusted.gpg.d/ubuntu-toolchain-r.asc \
+                "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xC8EC952E2A0E1FBDC5090F6A2C277A0A352154E5"
+
+            codename=$(. /etc/os-release; echo $VERSION_CODENAME)
+
+            echo "deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu $codename main" \
+            | \
+            sudo tee /etc/apt/sources.list.d/ubuntu-toolchain-r.list
+
+            sudo apt-get update
+        fi
 
         sudo apt-get -y install g++-10
 
