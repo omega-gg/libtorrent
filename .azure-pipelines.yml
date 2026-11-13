@@ -137,7 +137,7 @@ jobs:
   steps:
   # NOTE: We need an older version to package the application.
   - bash: |
-      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:18.04 tail -f /dev/null
+      docker run -d --name ubuntu -v $PWD:/libtorrent amd64/ubuntu:20.04 tail -f /dev/null
       docker exec -t ubuntu bash -c "cd /libtorrent/..;
                                      apt-get update;
                                      apt-get -y install sudo zip git;
