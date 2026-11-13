@@ -181,16 +181,16 @@ elif [ $1 = "linux" ] || [ $1 = "android" ]; then
 
     sudo apt-get -y install build-essential curl unzip
 
-    # NOTE libtorrent 2.1: We need gcc 9 for C++17 <charconv> and ubuntu:18.04 (qt4) ships gcc 7.
-    if [ "$(gcc -dumpversion | cut -d. -f1)" -lt 9 ]; then
+    # NOTE libtorrent 2.1: We need gcc 10 for C++17, ubuntu:18.04 ships gcc 7 and 20.04 gcc 9.
+    if [ "$(gcc -dumpversion | cut -d. -f1)" -lt 10 ]; then
 
-        sudo apt-get -y install software-properties-common
+        sudo DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-common
 
         sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
-        sudo apt-get -y install g++-9
+        sudo apt-get -y install g++-10
 
-        sudo ln -sf g++-9 /usr/bin/g++
+        sudo ln -sf g++-10 /usr/bin/g++
     fi
 
     echo ""
