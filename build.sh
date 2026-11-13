@@ -447,6 +447,7 @@ else
     elif [ $1 = "macOS" ]; then
 
         b2 -j4 toolset=darwin cxxstd=17 variant=release link=shared threading=multi \
+               cflags="-arch x86_64 -arch arm64" linkflags="-arch x86_64 -arch arm64" \
                crypto=built-in webtorrent=off install --prefix="$PWD/build"
 
     elif [ $1 = "linux" ]; then
